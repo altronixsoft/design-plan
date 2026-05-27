@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX Roadmap — Полный план обучения</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --surface: #111118;
+    --surface2: #1A1A26;
+    --surface3: #22223A;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --text: #F0EEFF;
+    --muted: #8884AA;
+    --accent1: #7C6FFF;
+    --accent2: #FF6B6B;
+    --accent3: #2FFFB4;
+    --accent4: #FFB347;
+    --accent5: #FF6BF5;
+    --accent6: #6BE4FF;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 64px 32px 48px;
+    max-width: 900px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent3);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-tag::before { content: ''; display: inline-block; width: 20px; height: 1px; background: var(--accent3); }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 54px);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .hero h1 span { color: var(--accent1); }
+  .hero p {
+    font-size: 16px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--accent3);
+  }
+  .stat-label { font-size: 12px; color: var(--muted); }
+
+  /* TIMELINE NAV */
+  .timeline-nav {
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+    border-bottom: 1px solid var(--border);
+    scrollbar-width: none;
+  }
+  .timeline-nav::-webkit-scrollbar { display: none; }
+  .tnav-item {
+    padding: 16px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .tnav-item:hover { color: var(--text); }
+  .tnav-item.active { color: var(--text); }
+  .tnav-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* MAIN */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 32px 80px; }
+
+  /* PHASE */
+  .phase { display: none; padding-top: 40px; }
+  .phase.active { display: block; }
+
+  .phase-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 32px;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+  }
+  .p1 .phase-header::before { background: var(--accent1); }
+  .p2 .phase-header::before { background: var(--accent3); }
+  .p3 .phase-header::before { background: var(--accent4); }
+  .p4 .phase-header::before { background: var(--accent2); }
+  .p5 .phase-header::before { background: var(--accent5); }
+  .p6 .phase-header::before { background: var(--accent6); }
+
+  .phase-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.15;
+    flex-shrink: 0;
+    width: 60px;
+  }
+  .phase-info h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: -0.3px;
+  }
+  .phase-info p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .phase-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .meta-tag {
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--muted);
+  }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-title {
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::before {
+    content: '//';
+    opacity: 0.4;
+  }
+
+  /* TOPICS GRID */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+  .topic-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topic-icon { font-size: 16px; flex-shrink: 0; }
+
+  /* RESOURCES */
+  .resources-list { display: flex; flex-direction: column; gap: 10px; }
+  .resource-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 12px;
+    align-items: start;
+    transition: border-color 0.2s;
+  }
+  .resource-card:hover { border-color: var(--border2); }
+  .res-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .yt { background: rgba(255, 0, 0, 0.1); }
+  .book { background: rgba(124, 111, 255, 0.1); }
+  .tool { background: rgba(47, 255, 180, 0.1); }
+  .ai { background: rgba(255, 107, 245, 0.1); }
+
+  .res-body { flex: 1; }
+  .res-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 3px;
+    color: var(--text);
+  }
+  .res-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .res-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    color: var(--accent1);
+    text-decoration: none;
+    margin-top: 6px;
+    padding: 4px 8px;
+    border: 1px solid rgba(124,111,255,0.2);
+    border-radius: 6px;
+    transition: all 0.15s;
+  }
+  .res-link:hover {
+    background: rgba(124,111,255,0.1);
+    border-color: rgba(124,111,255,0.4);
+  }
+  .res-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+  .free { background: rgba(47,255,180,0.1); color: var(--accent3); }
+  .paid { background: rgba(255,107,107,0.1); color: var(--accent2); }
+  .freemium { background: rgba(255,179,71,0.1); color: var(--accent4); }
+
+  /* HOMEWORK WEEKS */
+  .weeks { display: flex; flex-direction: column; gap: 12px; }
+  .week-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .week-header:hover { background: var(--surface2); }
+  .week-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 70px;
+  }
+  .week-title {
+    flex: 1;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .week-arrow {
+    color: var(--muted);
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+  .week-arrow.open { transform: rotate(180deg); }
+  .week-body {
+    display: none;
+    padding: 0 18px 16px;
+    border-top: 1px solid var(--border);
+  }
+  .week-body.open { display: block; }
+  .hw-list { display: flex; flex-direction: column; gap: 8px; padding-top: 14px; }
+  .hw-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.6;
+    padding: 10px 12px;
+    background: var(--surface2);
+    border-radius: 8px;
+  }
+  .hw-marker {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-family: 'Space Mono', monospace;
+  }
+  .hw-study { background: rgba(124,111,255,0.15); color: var(--accent1); }
+  .hw-practice { background: rgba(47,255,180,0.15); color: var(--accent3); }
+  .hw-project { background: rgba(255,107,107,0.15); color: var(--accent2); }
+  .hw-ai { background: rgba(255,107,245,0.15); color: var(--accent5); }
+
+  .hw-label {
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    opacity: 0.6;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+
+  /* PROJECT CARD */
+  .project-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+  .project-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+  .project-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    padding: 8px 10px;
+    background: var(--surface);
+    border-radius: 7px;
+  }
+  .step-n {
+    width: 20px; height: 20px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* AI TOOLS SPECIAL */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .ai-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    transition: border-color 0.2s;
+  }
+  .ai-card:hover { border-color: rgba(255,107,245,0.3); }
+  .ai-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .ai-emoji {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,107,245,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .ai-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .ai-use {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  .ai-when {
+    font-size: 11px;
+    color: var(--accent5);
+    font-style: italic;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 2px; }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    display: flex;
+    height: 4px;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    gap: 2px;
+  }
+  .pb-seg { flex: 1; border-radius: 1px; }
+
+  .p7 .phase-header::before { background: #C8FF47; }
+
+  /* TOOLS PAGE */
+  .tools-category { margin-bottom: 32px; }
+  .tools-category-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .tools-category-title .cat-icon {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 10px;
+  }
+  .tool-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: border-color 0.2s;
+    position: relative;
+  }
+  .tool-item:hover { border-color: var(--border2); }
+  .tool-item-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .tool-logo {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .tool-name-block { flex: 1; }
+  .tool-name {
+    font-weight: 600;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 1px;
+  }
+  .tool-category-label {
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+  }
+  .tool-priority {
+    font-size: 9px;
+    padding: 3px 7px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+    align-self: flex-start;
+  }
+  .must { background: rgba(255,107,107,0.15); color: #FF6B6B; border: 1px solid rgba(255,107,107,0.2); }
+  .important { background: rgba(255,179,71,0.15); color: #FFB347; border: 1px solid rgba(255,179,71,0.2); }
+  .bonus { background: rgba(47,255,180,0.15); color: #2FFFB4; border: 1px solid rgba(47,255,180,0.2); }
+  .tool-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 8px;
+  }
+  .tool-when {
+    font-size: 11px;
+    color: var(--text);
+    opacity: 0.7;
+    border-left: 2px solid var(--border2);
+    padding-left: 8px;
+    line-height: 1.4;
+    margin-bottom: 8px;
+  }
+  .tool-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    color: var(--accent1);
+    text-decoration: none;
+    padding: 3px 8px;
+    border: 1px solid rgba(124,111,255,0.2);
+    border-radius: 5px;
+    transition: all 0.15s;
+  }
+  .tool-link:hover { background: rgba(124,111,255,0.1); }
+  .legend-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .skill-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .matrix-col {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .matrix-col-title {
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .matrix-item {
+    font-size: 12px;
+    padding: 5px 0;
+    color: var(--muted);
+    display: flex;
+    gap: 6px;
+    align-items: flex-start;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.4;
+  }
+  .matrix-item:last-child { border-bottom: none; }
+  .matrix-dot { font-size: 8px; margin-top: 4px; flex-shrink: 0; }
+  @media (max-width: 600px) {
+    .hero, .main { padding-left: 16px; padding-right: 16px; }
+    .timeline-nav { padding: 0 16px; }
+    .phase-num { display: none; }
+    .hero-stats { gap: 20px; }
+    .ai-grid, .topics-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">UI/UX Roadmap 2025–2026</div>
+  <h1>Полный план обучения<br><span>дизайну с нуля</span></h1>
+  <p>Подробный roadmap с ресурсами, ссылками и домашними заданиями. От абсолютного нуля до уверенной работы на проектах — с использованием AI-инструментов.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-val">10–12</div><div class="stat-label">месяцев</div></div>
+    <div class="stat"><div class="stat-val">6</div><div class="stat-label">фаз обучения</div></div>
+    <div class="stat"><div class="stat-val">3–5</div><div class="stat-label">кейсов в портфолио</div></div>
+    <div class="stat"><div class="stat-val">~4</div><div class="stat-label">часа в неделю</div></div>
+  </div>
+</div>
+
+<div class="timeline-nav">
+  <div class="tnav-item active" onclick="showPhase(0)" data-i="0">
+    <span class="tnav-dot" style="background:#7C6FFF"></span>Основы визуала
+  </div>
+  <div class="tnav-item" onclick="showPhase(1)" data-i="1">
+    <span class="tnav-dot" style="background:#2FFFB4"></span>Figma
+  </div>
+  <div class="tnav-item" onclick="showPhase(2)" data-i="2">
+    <span class="tnav-dot" style="background:#FFB347"></span>UX процесс
+  </div>
+  <div class="tnav-item" onclick="showPhase(3)" data-i="3">
+    <span class="tnav-dot" style="background:#FF6B6B"></span>UI Система
+  </div>
+  <div class="tnav-item" onclick="showPhase(4)" data-i="4">
+    <span class="tnav-dot" style="background:#FF6BF5"></span>AI + Дизайн
+  </div>
+  <div class="tnav-item" onclick="showPhase(5)" data-i="5">
+    <span class="tnav-dot" style="background:#6BE4FF"></span>Портфолио
+  </div>
+  <div class="tnav-item" onclick="showPhase(6)" data-i="6">
+    <span class="tnav-dot" style="background:#C8FF47"></span>Инструменты
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- PHASE 1 -->
+  <div class="phase p1 active" id="phase-0">
+    <div class="phase-header">
+      <div class="phase-num">01</div>
+      <div class="phase-info">
+        <h2>Основы визуала и дизайн-мышления</h2>
+        <p>Прежде чем открыть Figma — нужно "поставить глаз". Цвет, типографика, композиция и сетки — фундамент, без которого всё остальное рассыпается. Эта фаза формирует дизайнерское мышление.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">Недели 1–6</span>
+          <span class="meta-tag">2–3 ч/нед</span>
+          <span class="meta-tag">Инструменты: Canva, Pinterest</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Что изучаем</div>
+      <div class="topics-grid">
+        <div class="topic-card"><span class="topic-icon">🎨</span>Теория цвета</div>
+        <div class="topic-card"><span class="topic-icon">🔤</span>Типографика</div>
+        <div class="topic-card"><span class="topic-icon">📐</span>Композиция и сетки</div>
+        <div class="topic-card"><span class="topic-icon">📏</span>Пространство и отступы</div>
+        <div class="topic-card"><span class="topic-icon">👁️</span>Визуальная иерархия</div>
+        <div class="topic-card"><span class="topic-icon">🖼️</span>Анализ реальных UI</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ресурсы с ссылками</div>
+      <div class="resources-list">
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">DesignCourse — Gary Simon</div>
+            <div class="res-desc">Лучший канал для начала. Плейлист "UI Design Fundamentals": цвет, типографика, пространство, иерархия. Конкретные уроки с примерами.</div>
+            <a class="res-link" href="https://www.youtube.com/@DesignCourse" target="_blank">↗ youtube.com/@DesignCourse</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">📖</div>
+          <div class="res-body">
+            <div class="res-title">Canva Design School — бесплатный курс</div>
+            <div class="res-desc">Модули по цвету, типографике и дизайн-принципам. Интерактивно, с примерами. Идеально для старта без Figma.</div>
+            <a class="res-link" href="https://www.canva.com/learn/design-school/" target="_blank">↗ canva.com/learn/design-school</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">The Futur — Chris Do</div>
+            <div class="res-desc">Видео о дизайн-мышлении, роли дизайнера, как смотреть на работы. Формирует правильный mindset. Плейлист "Design Basics".</div>
+            <a class="res-link" href="https://www.youtube.com/@thefutur" target="_blank">↗ youtube.com/@thefutur</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">🎯</div>
+          <div class="res-body">
+            <div class="res-title">Refactoring UI — статьи (бесплатные)</div>
+            <div class="res-desc">Авторы Tailwind CSS. Короткие, конкретные уроки: почему этот дизайн выглядит плохо и как это исправить. Читать 1–2 статьи в неделю.</div>
+            <a class="res-link" href="https://www.refactoringui.com" target="_blank">↗ refactoringui.com</a>
+          </div>
+          <span class="res-badge freemium">часть бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">🔍</div>
+          <div class="res-body">
+            <div class="res-title">Khroma — AI-подборка цветовых палитр</div>
+            <div class="res-desc">Тренируешь AI под свой вкус, он генерирует бесконечные палитры. Инструмент для изучения и практики цвета.</div>
+            <a class="res-link" href="https://www.khroma.co" target="_blank">↗ khroma.co</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">🏛️</div>
+          <div class="res-body">
+            <div class="res-title">Fonts In Use — типографика в реальных работах</div>
+            <div class="res-desc">База реальных дизайнов с описанием шрифтов. Смотреть, как профессионалы работают с типографикой.</div>
+            <a class="res-link" href="https://fontsinuse.com" target="_blank">↗ fontsinuse.com</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Домашние задания по неделям</div>
+      <div class="weeks">
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Неделя 1</span>
+            <span class="week-title">Цвет — теория и практика</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body open">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Посмотреть плейлист DesignCourse "Color in UI Design" (3–4 видео, ~40 мин). Записать: что такое первичные/вторичные цвета, тёплые/холодные, контраст.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Создать 5 цветовых палитр в Khroma. Для каждой написать: какое настроение передаёт, подойдёт ли для детского/медицинского/игрового приложения.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Найти 3 приложения (любых) с разными цветовыми стилями. Для каждого: выписать главный цвет, вторичный, фоновый. Почему именно эти цвета выбраны?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Неделя 2</span>
+            <span class="week-title">Типографика — читабельность и иерархия</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Посмотреть 2–3 видео DesignCourse о типографике. Записать: serif vs sans-serif, что такое line-height, letter-spacing, размерная шкала (H1/H2/body/caption).</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Открыть Google Fonts. Выбрать 3 пары шрифтов: один для заголовков + один для текста. Для каждой пары написать: в каком типе приложения это смотрелось бы хорошо.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Сделать скриншот 3 разных сайтов и разметить текст: H1 / H2 / body / caption. Проверить — везде ли чёткая иерархия? Что бы ты улучшила?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Неделя 3</span>
+            <span class="week-title">Композиция и пространство</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Видео DesignCourse "Spacing & Layout" + прочитать 2 статьи из Refactoring UI (можно бесплатные из Twitter/X автора @adamwathan).</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Взять скриншот любого экрана телефона (не дизайнерского — например скрин системного меню). Нарисовать поверх него маркером (или в Paint/Canva) как бы ты расставила отступы. Что важнее и должно быть крупнее?</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">мини-проект</div></div>
+                <span>В Canva создать простую карточку товара (любого). Применить: чёткая иерархия текста, отступы, цвет. Сохранить и сравнить с карточкой в реальном магазине (напр. Rozetka).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 4–6</span>
+            <span class="week-title">Насмотренность + анализ реальных UI</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Каждый день 10 минут: просматривать Dribbble или Mobbin. Сохранять то, что нравится в отдельную папку. К концу 3 недель — 60+ референсов. Периодически пересматривать и думать: почему нравится именно это?</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Разобрать 5 реальных экранов из Mobbin: написать для каждого — цветовая схема, размер кнопок, как расположен контент, что привлекает взгляд первым.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">итог фазы</div></div>
+                <span>Создать мудборд в Pinterest: 30+ изображений на тему "мой идеальный мобильный дизайн". Разбить на секции: цвет, типографика, компоненты. Это будет твой визуальный язык.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase p2" id="phase-1">
+    <div class="phase-header">
+      <div class="phase-num">02</div>
+      <div class="phase-info">
+        <h2>Figma — от нуля до уверенного пользователя</h2>
+        <p>Figma — главный инструмент работы. Нужно освоить не "нажимать кнопки", а мыслить в логике Figma: компоненты, системы, авто-лейауты. Это фундамент для быстрой работы на проектах.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">Недели 7–16</span>
+          <span class="meta-tag">3–4 ч/нед</span>
+          <span class="meta-tag">Инструмент: Figma</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Что изучаем</div>
+      <div class="topics-grid">
+        <div class="topic-card"><span class="topic-icon">🖼️</span>Фреймы и слои</div>
+        <div class="topic-card"><span class="topic-icon">📐</span>Auto Layout</div>
+        <div class="topic-card"><span class="topic-icon">🧩</span>Компоненты</div>
+        <div class="topic-card"><span class="topic-icon">🎭</span>Варианты компонентов</div>
+        <div class="topic-card"><span class="topic-icon">🎨</span>Стили и переменные</div>
+        <div class="topic-card"><span class="topic-icon">🔗</span>Прототипирование</div>
+        <div class="topic-card"><span class="topic-icon">📱</span>Мобильные фреймы</div>
+        <div class="topic-card"><span class="topic-icon">🤝</span>Плагины Figma</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ресурсы с ссылками</div>
+      <div class="resources-list">
+        <div class="resource-card">
+          <div class="res-icon book">📘</div>
+          <div class="res-body">
+            <div class="res-title">Figma Design for Beginners 2025 — официальный курс</div>
+            <div class="res-desc">От самой Figma. 12 уроков — строим сайт-портфолио с нуля. Frames → Auto Layout → Components → Prototyping. Самый актуальный материал.</div>
+            <a class="res-link" href="https://help.figma.com/hc/en-us/articles/30848209492887" target="_blank">↗ help.figma.com → Design for Beginners</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">Flux Academy — Figma Crash Course (Full Website in 60 min)</div>
+            <div class="res-desc">Практический подход: сразу делаем реальный сайт. Все ключевые функции 2024 за одно видео. Хорошо смотреть вместе с официальным курсом.</div>
+            <a class="res-link" href="https://www.youtube.com/watch?v=ZkiqyA0N71U" target="_blank">↗ youtube.com/watch?v=ZkiqyA0N71U</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">Mizko — Auto Layout & Components глубоко</div>
+            <div class="res-desc">Лучшее объяснение Auto Layout 5.0, constraints, компонентов и их вариантов. После него Auto Layout станет понятным и интуитивным.</div>
+            <a class="res-link" href="https://www.youtube.com/@mizko" target="_blank">↗ youtube.com/@mizko</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">🔌</div>
+          <div class="res-body">
+            <div class="res-title">Figma Plugins: Iconify, Unsplash, Stark (доступность)</div>
+            <div class="res-desc">Iconify — 200 000+ иконок прямо в Figma. Unsplash — реальные фото. Stark — проверка цветового контраста (доступность). Установить сразу.</div>
+            <a class="res-link" href="https://www.figma.com/community/plugins" target="_blank">↗ figma.com/community/plugins</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">📦</div>
+          <div class="res-body">
+            <div class="res-title">Untitled UI Kit — бесплатный дизайн-кит</div>
+            <div class="res-desc">Лучший бесплатный UI Kit для Figma. Тысячи компонентов, тёмная/светлая темы, переменные. Изучать его структуру — отличная практика по дизайн-системам.</div>
+            <a class="res-link" href="https://www.figma.com/community/file/1056002968136195424" target="_blank">↗ Figma Community — Untitled UI</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Домашние задания по неделям</div>
+      <div class="weeks">
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 7–8</span>
+            <span class="week-title">Первое знакомство — фреймы, шейпы, текст</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Пройти первые 4 урока официального курса Figma. Параллельно — создать аккаунт, изучить интерфейс: левая панель (слои), правая (свойства), панель инструментов.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>UI Copy Challenge — найти любой экран телефона и воссоздать его в Figma 1:1. Важна точность: отступы, цвета, шрифты. Начни с простого — экран калькулятора или "О телефоне" в настройках.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 9–10</span>
+            <span class="week-title">Auto Layout — главная суперсила Figma</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Посмотреть видео Mizko по Auto Layout (1–1,5 часа). Цель: понять как работает gap, padding, fill/hug/fixed и вложенные авто-лейауты.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Построить карточку товара (картинка + название + цена + кнопка) используя ТОЛЬКО Auto Layout. Проверить — если менять длину текста, карточка должна растягиваться правильно.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Построить навигационное меню (навбар) с лого, 4 пунктами и кнопкой. Auto Layout + Constraints чтобы он правильно тянулся по ширине.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 11–12</span>
+            <span class="week-title">Компоненты, варианты, стили</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Пройти уроки официального курса Figma по Components и Variants. Понять: главный компонент vs инстанс, зачем нужны варианты, как делать кнопку со всеми состояниями.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">мини-проект</div></div>
+                <span>Создать мини-библиотеку компонентов: кнопка (3 размера × 3 состояния), input-поле (normal/focus/error), иконка-аватар. Правильно назвать всё в слоях: "Button/Primary/Large/Default".</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 13–14</span>
+            <span class="week-title">Прототипирование и анимации переходов</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Изучить прототипирование в Figma: Connections, Triggers, Transitions. Smart Animate — для плавных переходов.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">проект</div></div>
+                <span>Первый полноценный прототип: 5 экранов мобильного приложения (любого) с рабочими переходами. Сделать так, чтобы можно было кликать и переходить между экранами — покажи кому-нибудь и получи обратную связь.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Скачать Untitled UI Kit, открыть в Figma. Изучить структуру: как организованы компоненты, стили, переменные. Попробовать использовать 5–6 компонентов в своём макете.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 15–16</span>
+            <span class="week-title">Итоговый проект фазы: копия реального приложения</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">итог фазы</div></div>
+                <span>Выбрать реальное приложение (Spotify, Duolingo, Notion — что нравится) и воссоздать минимум 8 экранов в Figma. Условия: правильная структура слоёв, компоненты, Auto Layout, прототип с переходами. Это НЕ должно быть идеально — важна практика, а не результат.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase p3" id="phase-2">
+    <div class="phase-header">
+      <div class="phase-num">03</div>
+      <div class="phase-info">
+        <h2>UX — логика, исследования и пользовательский путь</h2>
+        <p>UX — это не "как выглядит", а "как работает". Эта фаза учит думать о пользователе: зачем он открыл приложение, где заблудится, что его расстроит. Без UX — красивый дизайн просто не работает.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">Недели 17–24</span>
+          <span class="meta-tag">3–4 ч/нед</span>
+          <span class="meta-tag">Инструменты: Figma, FigJam</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Что изучаем</div>
+      <div class="topics-grid">
+        <div class="topic-card"><span class="topic-icon">🔍</span>User Research</div>
+        <div class="topic-card"><span class="topic-icon">👤</span>Персоны</div>
+        <div class="topic-card"><span class="topic-icon">🗺️</span>User Flow</div>
+        <div class="topic-card"><span class="topic-icon">📝</span>Wireframing</div>
+        <div class="topic-card"><span class="topic-icon">🧪</span>Usability Testing</div>
+        <div class="topic-card"><span class="topic-icon">📊</span>Empathy Map</div>
+        <div class="topic-card"><span class="topic-icon">🏗️</span>Information Architecture</div>
+        <div class="topic-card"><span class="topic-icon">🎯</span>Jobs To Be Done</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ресурсы с ссылками</div>
+      <div class="resources-list">
+        <div class="resource-card">
+          <div class="res-icon book">🎓</div>
+          <div class="res-body">
+            <div class="res-title">Google UX Design Certificate — Coursera (аудит бесплатно)</div>
+            <div class="res-desc">Лучший структурированный курс по UX от Google. Можно "audit" — смотреть бесплатно без сертификата. Курс 1–3 полностью покрывают эту фазу: research, wireframes, usability.</div>
+            <a class="res-link" href="https://www.coursera.org/professional-certificates/google-ux-design" target="_blank">↗ coursera.org → Google UX Design</a>
+          </div>
+          <span class="res-badge freemium">аудит бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">Laith Wallace — UX Design for Beginners (плейлист)</div>
+            <div class="res-desc">Персоны, user flow, что такое хороший UX, как строить портфолио-кейс. Очень понятно объясняет, без воды.</div>
+            <a class="res-link" href="https://www.youtube.com/@laithwallace" target="_blank">↗ youtube.com/@laithwallace</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">AJ&Smart — Design Sprint & UX Strategy</div>
+            <div class="res-desc">Как топ-команды разрабатывают продукты, Design Sprint методология. Смотреть для понимания реального рабочего процесса дизайнера.</div>
+            <a class="res-link" href="https://www.youtube.com/@AJSmart" target="_blank">↗ youtube.com/@AJSmart</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">🗂️</div>
+          <div class="res-body">
+            <div class="res-title">FigJam — бесплатный инструмент для схем и флоу</div>
+            <div class="res-desc">От Figma. Для рисования user flow, empathy map, sitemap — прямо в браузере. Идеально для UX-фазы.</div>
+            <a class="res-link" href="https://www.figma.com/figjam/" target="_blank">↗ figma.com/figjam</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">📱</div>
+          <div class="res-body">
+            <div class="res-title">Mobbin — реальные UI-паттерны мобильных приложений</div>
+            <div class="res-desc">База скриншотов реальных приложений с фильтрами по паттернам (onboarding, checkout, search). Для изучения как делают UX в топ-приложениях.</div>
+            <a class="res-link" href="https://mobbin.com" target="_blank">↗ mobbin.com</a>
+          </div>
+          <span class="res-badge freemium">часть бесплатно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Домашние задания по неделям</div>
+      <div class="weeks">
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 17–18</span>
+            <span class="week-title">Research — разобраться в проблеме</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">проект</div></div>
+                <span>Придумать идею приложения (реши реальную проблему подростков: расписание, общение, хобби, учёба). Провести мини-интервью с 3 людьми: "Расскажи как ты сейчас решаешь эту проблему?" Записать главные инсайты.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Создать Empathy Map (FigJam): что пользователь думает / чувствует / говорит / делает. Заполнить на основе интервью.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Создать 2 персоны (User Persona): имя, возраст, цели, боли, сценарии использования. В FigJam или Figma. Они должны быть реалистичными — взяты из реального интервью.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 19–20</span>
+            <span class="week-title">User Flow и информационная архитектура</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Для своего приложения: нарисовать User Flow от открытия до выполнения главного действия. Использовать правильные обозначения: ромб = решение, прямоугольник = экран, стрелки = переходы. Инструмент: FigJam.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Разобрать любое реальное приложение (Telegram, Nova Poshta, Instagram) — попробовать нарисовать его User Flow для одного ключевого действия. Сравнить насколько это сложно или просто.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 21–22</span>
+            <span class="week-title">Wireframing — скелет интерфейса</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Посмотреть 2–3 видео Laith Wallace о wireframing. Понять разницу: Lo-fi (схема на бумаге) vs Mid-fi (серые блоки в Figma) vs Hi-fi (полноценный дизайн).</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Нарисовать от руки на бумаге 6 экранов своего приложения. Только блоки и стрелки — никакого цвета. Цель: проработать логику, а не красоту.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Перенести бумажные вайрфреймы в Figma как Mid-fi: серые блоки, заглушки для текста, кнопки без стиля. Показать другу или члену семьи — понимают ли они что здесь происходит?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 23–24</span>
+            <span class="week-title">Usability Testing — проверка логики</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">итог фазы</div></div>
+                <span>Провести usability test Mid-fi прототипа с 3 людьми. Задание: "Попробуй выполнить [конкретное действие] в этом приложении, я буду наблюдать". Не помогать, только наблюдать где они "застревают". Записать 5 проблем и исправить вайрфреймы.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI-задание</div></div>
+                <span>Использовать ChatGPT или Claude: "Ты UX-эксперт. Вот описание моего приложения [описание]. Найди 5 потенциальных проблем с пользовательским опытом и предложи решения." Сравнить AI-советы с реальными результатами тестирования.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase p4" id="phase-3">
+    <div class="phase-header">
+      <div class="phase-num">04</div>
+      <div class="phase-info">
+        <h2>UI Дизайн — визуальная система и полноценные макеты</h2>
+        <p>Теперь берём вайрфреймы и делаем из них красивый, живой дизайн. Изучаем дизайн-системы, доступность и как работать с несколькими экранами одновременно. После этой фазы будет первый полноценный кейс.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">Недели 25–34</span>
+          <span class="meta-tag">4–5 ч/нед</span>
+          <span class="meta-tag">Figma, дизайн-системы</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Что изучаем</div>
+      <div class="topics-grid">
+        <div class="topic-card"><span class="topic-icon">🎨</span>Дизайн-системы</div>
+        <div class="topic-card"><span class="topic-icon">📏</span>8px Grid System</div>
+        <div class="topic-card"><span class="topic-icon">♿</span>Доступность (a11y)</div>
+        <div class="topic-card"><span class="topic-icon">📱</span>Адаптивность</div>
+        <div class="topic-card"><span class="topic-icon">🌙</span>Dark Mode</div>
+        <div class="topic-card"><span class="topic-icon">🔄</span>Микроанимации</div>
+        <div class="topic-card"><span class="topic-icon">🖼️</span>Иллюстрации и иконки</div>
+        <div class="topic-card"><span class="topic-icon">✍️</span>UX Writing</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ресурсы с ссылками</div>
+      <div class="resources-list">
+        <div class="resource-card">
+          <div class="res-icon book">📖</div>
+          <div class="res-body">
+            <div class="res-title">Material Design 3 Guidelines — от Google</div>
+            <div class="res-desc">Полное руководство по дизайн-системе. Как строить компоненты, типографическую шкалу, цветовую систему. Читать как учебник дизайна.</div>
+            <a class="res-link" href="https://m3.material.io" target="_blank">↗ m3.material.io</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">📖</div>
+          <div class="res-body">
+            <div class="res-title">Apple Human Interface Guidelines</div>
+            <div class="res-desc">Стандарты дизайна Apple. Читать секции: Components, Foundations, Patterns. Понимание HIG — обязательно для мобильного дизайна.</div>
+            <a class="res-link" href="https://developer.apple.com/design/human-interface-guidelines" target="_blank">↗ developer.apple.com/design/hig</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">DesignCourse — полный UI-дизайн мобильного приложения</div>
+            <div class="res-desc">Видео серия: от идеи до финального макета реального приложения. Работа с цветом, типографикой, компонентами в реальном проекте.</div>
+            <a class="res-link" href="https://www.youtube.com/@DesignCourse" target="_blank">↗ youtube.com/@DesignCourse</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">🔍</div>
+          <div class="res-body">
+            <div class="res-title">Untitled UI Blog — дизайн-гайды с примерами</div>
+            <div class="res-desc">Гайды: цветовые палитры, таблицы в Figma, иконки, дизайн-системы. Очень практичный контент с примерами.</div>
+            <a class="res-link" href="https://www.untitledui.com/blog" target="_blank">↗ untitledui.com/blog</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">🎨</div>
+          <div class="res-body">
+            <div class="res-title">Coolors.co — быстрые цветовые палитры</div>
+            <div class="res-desc">Генератор палитр нажатием пробела. Проверка контраста, экспорт в Figma. Незаменим при старте нового проекта.</div>
+            <a class="res-link" href="https://coolors.co" target="_blank">↗ coolors.co</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Домашние задания по неделям</div>
+      <div class="weeks">
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 25–27</span>
+            <span class="week-title">Мини дизайн-система для своего проекта</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">проект</div></div>
+                <span>Создать отдельную страницу в Figma "Design System": цветовая палитра (primary, secondary, neutral, error/success), типографическая шкала (H1–H4, body, caption, label), библиотека компонентов (кнопки, input, карточка, навбар). Всё через переменные и стили Figma.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Прочитать гайд по 8px Grid System. Применить к своему проекту: все отступы кратны 8 (8, 16, 24, 32, 48, 64). Использовать Layout Grid в Figma.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 28–31</span>
+            <span class="week-title">Hi-fi макет всего приложения</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">главный проект</div></div>
+                <span>Взять Mid-fi вайрфреймы из фазы 3 и превратить в полноценный Hi-fi дизайн. Минимум 10 экранов, рабочий прототип. Применить весь арсенал: дизайн-система, компоненты, Auto Layout, правильные шрифты и цвета.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI-задание</div></div>
+                <span>Использовать ChatGPT для UX Writing: "Напиши тексты для onboarding экранов приложения [описание] — 3 слайда, каждый до 20 слов, дружелюбный тон для подростков". Вставить в макет, проверить читаемость.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Недели 32–34</span>
+            <span class="week-title">Доступность + тёмная тема + итог</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-study">📖</div><div class="hw-label">теория</div></div>
+                <span>Изучить WCAG 2.1 основы: минимальный контраст текста 4.5:1, size кнопок min 44px. Проверить свой проект плагином Stark в Figma — исправить найденные проблемы.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">практика</div></div>
+                <span>Добавить тёмную тему к проекту через Figma Variables (Color Tokens). Создать два режима: Light/Dark. Проверить все компоненты в обоих режимах.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase p5" id="phase-4">
+    <div class="phase-header">
+      <div class="phase-num">05</div>
+      <div class="phase-info">
+        <h2>AI-инструменты в дизайне — как ускорить работу в 3×</h2>
+        <p>AI не заменяет дизайнера — он убирает скучную часть работы. Эта фаза учит использовать AI как профи: для идей, генерации UI, написания текстов и исследований. Дизайнер, умеющий работать с AI, стоит дороже.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">Недели 35–40</span>
+          <span class="meta-tag">параллельно с проектами</span>
+          <span class="meta-tag">AI-инструменты</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">AI-инструменты для дизайна — подробно</div>
+      <div class="ai-grid">
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">✨</div>
+            <div>
+              <div class="ai-name">Figma AI (Make)</div>
+              <a class="res-link" href="https://www.figma.com/ai/" target="_blank" style="margin-top:0">↗ figma.com/ai</a>
+            </div>
+          </div>
+          <div class="ai-use">Встроенный AI в Figma: генерация макетов из текстового описания, замена placeholder-контента, автозаполнение данных, создание вариантов дизайна.</div>
+          <div class="ai-when">Когда: быстро набросать идею или заполнить макет реалистичными данными</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">🤖</div>
+            <div>
+              <div class="ai-name">Uizard</div>
+              <a class="res-link" href="https://uizard.io" target="_blank" style="margin-top:0">↗ uizard.io</a>
+            </div>
+          </div>
+          <div class="ai-use">Лучший для начинающих. Описываешь приложение → получаешь набор экранов. Можно загрузить скетч от руки и конвертировать в дизайн.</div>
+          <div class="ai-when">Когда: нужно быстро визуализировать идею или показать клиенту концепцию</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">🌐</div>
+            <div>
+              <div class="ai-name">Google Stitch (ex-Galileo AI)</div>
+              <a class="res-link" href="https://stitch.withgoogle.com" target="_blank" style="margin-top:0">↗ stitch.withgoogle.com</a>
+            </div>
+          </div>
+          <div class="ai-use">Генерирует Hi-fi UI из текста. Несколько вариантов сразу — выбираешь лучший. Экспорт в Figma. Хорошо для лендингов и дашбордов.</div>
+          <div class="ai-when">Когда: нужен быстрый Hi-fi референс или задан стиль заказчика</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">🎨</div>
+            <div>
+              <div class="ai-name">Khroma</div>
+              <a class="res-link" href="https://khroma.co" target="_blank" style="margin-top:0">↗ khroma.co</a>
+            </div>
+          </div>
+          <div class="ai-use">AI выучивает твой цветовой вкус по 50 понравившимся цветам и генерирует бесконечные подходящие палитры с проверкой контраста.</div>
+          <div class="ai-when">Когда: подбираешь цветовую схему для нового проекта</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">💬</div>
+            <div>
+              <div class="ai-name">ChatGPT / Claude</div>
+              <a class="res-link" href="https://claude.ai" target="_blank" style="margin-top:0">↗ claude.ai</a>
+            </div>
+          </div>
+          <div class="ai-use">UX Research синтез, написание UX copy (тексты интерфейса), анализ конкурентов, обратная связь по дизайн-решениям, подготовка презентации кейса.</div>
+          <div class="ai-when">Когда: нужна помощь с текстами, структурой проекта или анализом</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">🖼️</div>
+            <div>
+              <div class="ai-name">Adobe Firefly</div>
+              <a class="res-link" href="https://firefly.adobe.com" target="_blank" style="margin-top:0">↗ firefly.adobe.com</a>
+            </div>
+          </div>
+          <div class="ai-use">Генерация изображений для макетов: иллюстрации, фоны, hero-картинки. Работает по описанию, обучен на лицензированном контенте — безопасно использовать в проектах.</div>
+          <div class="ai-when">Когда: нужны уникальные изображения под стиль проекта</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">🧪</div>
+            <div>
+              <div class="ai-name">Relume AI</div>
+              <a class="res-link" href="https://library.relume.io" target="_blank" style="margin-top:0">↗ library.relume.io</a>
+            </div>
+          </div>
+          <div class="ai-use">AI генерирует sitemap и wireframe сайта из описания. Отличный стартовый инструмент для веб-проектов: сначала AI делает структуру, ты её дорабатываешь.</div>
+          <div class="ai-when">Когда: начинаешь новый сайт и нужно быстро выстроить структуру</div>
+        </div>
+        <div class="ai-card">
+          <div class="ai-card-header">
+            <div class="ai-emoji">⚡</div>
+            <div>
+              <div class="ai-name">Framer AI</div>
+              <a class="res-link" href="https://framer.com" target="_blank" style="margin-top:0">↗ framer.com</a>
+            </div>
+          </div>
+          <div class="ai-use">Из Figma-макета или текстового описания — в живой сайт. AI добавляет анимации, адаптивность. Показывать клиентам вместо статичного прототипа.</div>
+          <div class="ai-when">Когда: нужно быстро показать живой прототип или сделать сайт-портфолио</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Домашние задания — AI-практика</div>
+      <div class="weeks">
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Неделя 35–36</span>
+            <span class="week-title">AI для генерации идей и UI-скетчей</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI</div></div>
+                <span>В Uizard: написать промпт "Приложение для трекинга чтения книг подростками, минималистичный стиль, фиолетовый акцент". Получить набор экранов. Выгрузить скриншоты и написать: что AI угадал правильно, что нужно доработать в Figma.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI</div></div>
+                <span>В Claude или ChatGPT: "Я дизайнер, придумываю приложение для [идея]. Составь список из 10 feature ideas, которые реально помогут пользователям, и 5 потенциальных UX-проблем которые я должна предусмотреть." Сохранить ответ и использовать в проекте.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Неделя 37–38</span>
+            <span class="week-title">AI + Figma: генерация → доработка руками</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI</div></div>
+                <span>В Google Stitch: сгенерировать лендинг для вымышленного продукта (например, "умные наушники для детей"). Экспортировать в Figma. Доработать: поменять шрифты, цвета, добавить правильные компоненты. Сохранить "до" и "после" — это покажет твою добавленную ценность.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI</div></div>
+                <span>Использовать Adobe Firefly: сгенерировать 5 разных hero-изображений для своего проекта по текстовому описанию. Выбрать лучшее, вставить в макет Figma. Сравнить: как изменился общий вид дизайна?</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Неделя 39–40</span>
+            <span class="week-title">AI для UX research и написания текстов</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI</div></div>
+                <span>Конкурентный анализ через AI: "Сравни UX подход приложений Duolingo, Drops и Babbel. Какие механики удержания пользователей они используют? Что из этого я могу применить в своём приложении для [тема]?"</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">AI</div></div>
+                <span>UX Copy с AI: написать промпт для ChatGPT/Claude чтобы создать все тексты интерфейса своего приложения: название, onboarding, пустые состояния, сообщения об ошибках. Проверить: тон соответствует целевой аудитории?</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-project">🚀</div><div class="hw-label">итог фазы</div></div>
+                <span>Написать гайд для себя (1 страница): "Как я использую AI в своей работе". Список инструментов, когда каждый применяется, примеры промптов которые сработали. Это будет полезно на собеседованиях.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase p6" id="phase-5">
+    <div class="phase-header">
+      <div class="phase-num">06</div>
+      <div class="phase-info">
+        <h2>Портфолио — 3 кейса и выход в мир</h2>
+        <p>Портфолио — главный инструмент дизайнера. Не нужно ждать "пока стану лучше". Начинать оформлять нужно прямо сейчас, с первых проектов. Хороший кейс = проблема + решение + результат, а не просто красивые скриншоты.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">Недели 41–48+</span>
+          <span class="meta-tag">параллельно с работой</span>
+          <span class="meta-tag">Behance, Figma Community</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">3 типа проектов для портфолио</div>
+
+      <div class="project-card">
+        <div class="project-title" style="color:#7C6FFF">Кейс 1 — Мобильное приложение (UX + UI)</div>
+        <div class="project-desc">Это главный кейс. Берём идею из Фазы 3, проходим весь путь: research → personas → wireframes → hi-fi. Показывает полный процесс мышления дизайнера.</div>
+        <div class="project-steps">
+          <div class="step"><div class="step-n" style="background:rgba(124,111,255,0.2);color:#7C6FFF">1</div><span>Описание проблемы — 2–3 предложения: кто, зачем, почему это важно</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(124,111,255,0.2);color:#7C6FFF">2</div><span>Research — скриншоты интервью или опроса, Empathy Map, 2 персоны</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(124,111,255,0.2);color:#7C6FFF">3</div><span>User Flow + Lo-fi wireframes (фото от руки или скрин из FigJam)</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(124,111,255,0.2);color:#7C6FFF">4</div><span>Hi-fi дизайн — минимум 8–10 экранов с дизайн-системой</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(124,111,255,0.2);color:#7C6FFF">5</div><span>Результаты usability test + что изменила после фидбека</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-title" style="color:#2FFFB4">Кейс 2 — Редизайн реального продукта</div>
+        <div class="project-desc">Берём реальный плохой сайт/приложение (можно украинский локальный бизнес), находим проблемы и делаем лучше. Показывает критическое мышление.</div>
+        <div class="project-steps">
+          <div class="step"><div class="step-n" style="background:rgba(47,255,180,0.2);color:#2FFFB4">1</div><span>Аудит оригинала — скриншоты + список проблем с обоснованием</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(47,255,180,0.2);color:#2FFFB4">2</div><span>Конкурентный анализ — как похожие продукты решают те же задачи</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(47,255,180,0.2);color:#2FFFB4">3</div><span>Редизайн ключевых экранов с объяснением каждого решения</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(47,255,180,0.2);color:#2FFFB4">4</div><span>Before/After сравнение с конкретными улучшениями</span></div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-title" style="color:#FFB347">Кейс 3 — Веб-лендинг или дашборд</div>
+        <div class="project-desc">Лендинг для реального или вымышленного продукта. Или дашборд с данными. Показывает умение работать с вебом и информационными интерфейсами.</div>
+        <div class="project-steps">
+          <div class="step"><div class="step-n" style="background:rgba(255,179,71,0.2);color:#FFB347">1</div><span>Структура через Relume AI → доработать в Figma</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(255,179,71,0.2);color:#FFB347">2</div><span>Hero-секция, features, pricing, CTA — все стандартные секции</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(255,179,71,0.2);color:#FFB347">3</div><span>Адаптив: desktop + мобильная версия</span></div>
+          <div class="step"><div class="step-n" style="background:rgba(255,179,71,0.2);color:#FFB347">4</div><span>Опционально: сделать живым через Framer AI — настоящий сайт как портфолио</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ресурсы для публикации и роста</div>
+      <div class="resources-list">
+        <div class="resource-card">
+          <div class="res-icon tool">🖼️</div>
+          <div class="res-body">
+            <div class="res-title">Behance — главная платформа для дизайн-портфолио</div>
+            <div class="res-desc">Публиковать кейсы с описанием процесса: проблема → решение → результат. Хорошо оформленный кейс в Behance = работающее резюме.</div>
+            <a class="res-link" href="https://behance.net" target="_blank">↗ behance.net</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">🎯</div>
+          <div class="res-body">
+            <div class="res-title">Figma Community — публикация файлов</div>
+            <div class="res-desc">Публиковать Figma-файлы проектов. Другие дизайнеры смогут изучить твою работу "изнутри" — это круче чем просто скриншоты.</div>
+            <a class="res-link" href="https://www.figma.com/community" target="_blank">↗ figma.com/community</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon tool">⚡</div>
+          <div class="res-body">
+            <div class="res-title">Framer — сделать живой сайт-портфолио</div>
+            <div class="res-desc">Создать личный сайт-портфолио прямо в Framer. Есть бесплатный план. Ссылку можно вставить в резюме и соцсети.</div>
+            <a class="res-link" href="https://framer.com" target="_blank">↗ framer.com</a>
+          </div>
+          <span class="res-badge freemium">есть бесплатный план</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon yt">▶️</div>
+          <div class="res-body">
+            <div class="res-title">Bestfolios — анализ лучших портфолио дизайнеров</div>
+            <div class="res-desc">Коллекция сильных дизайн-портфолио с разбором. Смотреть как структурируют кейсы, что пишут, как презентуют процесс.</div>
+            <a class="res-link" href="https://www.bestfolios.com" target="_blank">↗ bestfolios.com</a>
+          </div>
+          <span class="res-badge free">бесплатно</span>
+        </div>
+        <div class="resource-card">
+          <div class="res-icon book">📋</div>
+          <div class="res-body">
+            <div class="res-title">Платные курсы — когда будет база (через 8–10 мес)</div>
+            <div class="res-desc">Projector UI/UX Beginning (старт 29.05.2026, 5 мес, 3 кейса) или Beetroot Academy UX/UI Online. Идти туда уже с базой — получишь в 3× больше.</div>
+            <a class="res-link" href="https://prjctr.com/course/ui-ux-design-beginning" target="_blank">↗ prjctr.com → UI/UX Beginning</a>
+          </div>
+          <span class="res-badge paid">платно</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Ежедневные привычки дизайнера</div>
+      <div class="weeks">
+        <div class="week-card">
+          <div class="week-header" onclick="toggleWeek(this)">
+            <span class="week-num">Каждый день</span>
+            <span class="week-title">10-минутные ритуалы — насмотренность и рост</span>
+            <span class="week-arrow">▼</span>
+          </div>
+          <div class="week-body">
+            <div class="hw-list">
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">ежедневно</div></div>
+                <span><strong>5 мин:</strong> открыть Dribbble или Mobbin, посмотреть 5–10 работ. Сохранять что нравится без анализа — насмотренность накапливается постепенно.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-practice">✏️</div><div class="hw-label">3× в неделю</div></div>
+                <span><strong>UI Challenge:</strong> воссоздать один компонент из реального приложения в Figma — кнопку, карточку, навбар. 15–20 минут. Называть файлы и делать из них библиотеку.</span>
+              </div>
+              <div class="hw-item">
+                <div><div class="hw-marker hw-ai">🤖</div><div class="hw-label">1× в неделю</div></div>
+                <span><strong>AI эксперимент:</strong> попробовать новый промпт или инструмент. Записать что сработало, что нет. Формировать свою базу знаний по работе с AI.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PHASE 7 — TOOLS -->
+  <div class="phase p7" id="phase-6">
+    <div class="phase-header">
+      <div class="phase-num">🛠</div>
+      <div class="phase-info">
+        <h2>Полный стек инструментов UI/UX дизайнера</h2>
+        <p>Профессиональный дизайнер — это не только Figma. Это целый набор инструментов для разных задач: организация работы, тестирование, коммуникация с командой, передача макетов разработчикам. Знание этого стека сразу отличает джуна от мидла.</p>
+        <div class="phase-meta">
+          <span class="meta-tag">осваивать постепенно</span>
+          <span class="meta-tag">параллельно с учёбой</span>
+          <span class="meta-tag">часть — по мере работы в команде</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Приоритет изучения</div>
+      <div class="legend-row">
+        <div class="legend-item"><span class="tool-priority must">must</span> — без этого не устроиться на работу</div>
+        <div class="legend-item"><span class="tool-priority important">important</span> — спросят на собеседовании</div>
+        <div class="legend-item"><span class="tool-priority bonus">bonus</span> — выделит среди других кандидатов</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Матрица навыков — что осваивать и когда</div>
+      <div class="skill-matrix">
+        <div class="matrix-col">
+          <div class="matrix-col-title" style="color:#FF6B6B">Первые 3 месяца</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Figma — основы</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>FigJam — схемы</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Canva — старт</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Google Drive — хранение</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Notion — заметки</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Pinterest — мудборды</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Dribbble / Mobbin</div>
+        </div>
+        <div class="matrix-col">
+          <div class="matrix-col-title" style="color:#FFB347">Месяцы 4–7</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Figma — компоненты</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Figma Dev Mode</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Loom — видео-фидбек</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Maze — тестирование</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Google Forms</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Notion — база знаний</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Slack — коммуникация</div>
+        </div>
+        <div class="matrix-col">
+          <div class="matrix-col-title" style="color:#2FFFB4">Месяцы 8–12+</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Framer — живые сайты</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>ProtoPie — анимации</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Jira / Linear</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Hotjar — аналитика</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Pitch — презентации</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>Storybook (базово)</div>
+          <div class="matrix-item"><span class="matrix-dot">●</span>HTML/CSS основы</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. ДИЗАЙН -->
+    <div class="section">
+      <div class="section-title">1. Дизайн и прототипирование</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">🎨</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Figma</span>
+              <span class="tool-category-label">основной инструмент</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Главный инструмент индустрии. Дизайн, прототипы, компоненты, дизайн-системы, совместная работа — всё в одном месте. 90% вакансий требуют Figma.</div>
+          <div class="tool-when">Использовать: для всех макетов и прототипов</div>
+          <a class="tool-link" href="https://figma.com" target="_blank">↗ figma.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">🗂️</div>
+            <div class="tool-name-block">
+              <span class="tool-name">FigJam</span>
+              <span class="tool-category-label">вайтборд / схемы</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Онлайн-вайтборд от Figma. User flow, sitemap, empathy map, мозговые штурмы, воркшопы с командой. Встроен в Figma — отдельно устанавливать не нужно.</div>
+          <div class="tool-when">Использовать: UX-этап, планирование, воркшопы</div>
+          <a class="tool-link" href="https://figma.com/figjam" target="_blank">↗ figma.com/figjam</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,179,71,0.12)">⚡</div>
+            <div class="tool-name-block">
+              <span class="tool-name">ProtoPie</span>
+              <span class="tool-category-label">продвинутые анимации</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Когда Figma не хватает для анимаций — берут ProtoPie. Сложные микроанимации, реакции на скролл, жесты, переменные состояния. Портфолио с ProtoPie впечатляет.</div>
+          <div class="tool-when">Использовать: сложные анимации, впечатляющие демо для портфолио</div>
+          <a class="tool-link" href="https://protopie.io" target="_blank">↗ protopie.io</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(200,255,71,0.12)">🌐</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Framer</span>
+              <span class="tool-category-label">живые сайты из дизайна</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Превращает Figma-макет в настоящий живой сайт. AI-помощник для анимаций. Идеален для сайта-портфолио и для демонстрации проектов клиентам.</div>
+          <div class="tool-when">Использовать: личный сайт-портфолио, живые прототипы для клиентов</div>
+          <a class="tool-link" href="https://framer.com" target="_blank">↗ framer.com</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. ОРГАНИЗАЦИЯ РАБОТЫ -->
+    <div class="section">
+      <div class="section-title">2. Организация работы и проектов</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,255,255,0.06)">📋</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Notion</span>
+              <span class="tool-category-label">база знаний / проекты</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Всё в одном: заметки, база знаний, трекер задач, документация дизайн-системы, написание кейсов. Большинство дизайн-команд используют Notion как общее пространство. Можно встраивать Figma-файлы.</div>
+          <div class="tool-when">Использовать: вести заметки по урокам, документировать дизайн-решения, писать кейсы, трекать задачи</div>
+          <a class="tool-link" href="https://notion.so" target="_blank">↗ notion.so</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,107,0.12)">🎯</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Jira</span>
+              <span class="tool-category-label">задачи в продуктовых командах</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Стандарт в IT-компаниях. Дизайнер работает с тикетами: берёт задачу, переводит в "in progress", отмечает "done". Нужно понимать Scrum/Kanban доску. Не нужно глубоко — но ориентироваться обязательно.</div>
+          <div class="tool-when">Использовать: в работе в команде — трекинг задач, спринты</div>
+          <a class="tool-link" href="https://atlassian.com/software/jira" target="_blank">↗ atlassian.com/jira</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">📱</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Linear</span>
+              <span class="tool-category-label">современная альтернатива Jira</span>
+            </div>
+            <span class="tool-priority bonus">bonus</span>
+          </div>
+          <div class="tool-desc">Более красивый и быстрый трекер задач. Популярен в стартапах и продуктовых командах. Если Jira — это корпоративный стандарт, то Linear — стартаперский. Дизайнеры его любят за удобство.</div>
+          <div class="tool-when">Использовать: в командах стартапов и tech-компаний</div>
+          <a class="tool-link" href="https://linear.app" target="_blank">↗ linear.app</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">🗃️</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Google Drive</span>
+              <span class="tool-category-label">хранение файлов</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Хранение всех файлов проекта: ресёрч, фото интервью, референсы, экспортированные макеты. Google Docs для написания research-отчётов и брифов. Умение правильно организовывать папки — отдельный навык.</div>
+          <div class="tool-when">Использовать: хранить всё — от референсов до финальных макетов</div>
+          <a class="tool-link" href="https://drive.google.com" target="_blank">↗ drive.google.com</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. КОММУНИКАЦИЯ -->
+    <div class="section">
+      <div class="section-title">3. Коммуникация с командой</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,107,0.12)">💬</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Slack</span>
+              <span class="tool-category-label">мессенджер команды</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Стандарт корпоративного общения в IT. Каналы, треды, реакции, интеграции с Figma и Jira. Нужно уметь грамотно описывать дизайн-решения текстом — это навык само по себе.</div>
+          <div class="tool-when">Использовать: ежедневное общение в команде, обсуждение дизайн-решений</div>
+          <a class="tool-link" href="https://slack.com" target="_blank">↗ slack.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">🎥</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Loom</span>
+              <span class="tool-category-label">видео-объяснения</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Запись экрана + лицо с микрофоном. Вместо 10 минут текстового объяснения — 2-минутное видео с демонстрацией макета. Дизайнеры используют для презентации решений команде и клиентам.</div>
+          <div class="tool-when">Использовать: передача фидбека, презентация дизайна async</div>
+          <a class="tool-link" href="https://loom.com" target="_blank">↗ loom.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">📊</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Pitch</span>
+              <span class="tool-category-label">дизайн-презентации</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Красивый инструмент для презентаций. Дизайнеры используют для защиты решений перед стейкхолдерами, презентации кейсов и портфолио. Приятнее Google Slides, красивее PowerPoint.</div>
+          <div class="tool-when">Использовать: презентации кейсов, защита решений перед командой</div>
+          <a class="tool-link" href="https://pitch.com" target="_blank">↗ pitch.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(200,255,71,0.12)">📝</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Confluence</span>
+              <span class="tool-category-label">документация в больших командах</span>
+            </div>
+            <span class="tool-priority bonus">bonus</span>
+          </div>
+          <div class="tool-desc">Вики-пространство корпоративного уровня. Используется в крупных IT-компаниях для хранения дизайн-спецификаций, гайдлайнов, результатов исследований. Пара компаний в вакансии — упомяни что знаешь.</div>
+          <div class="tool-when">Использовать: большие команды, Enterprise-проекты</div>
+          <a class="tool-link" href="https://atlassian.com/software/confluence" target="_blank">↗ atlassian.com/confluence</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. UX RESEARCH AND TESTING -->
+    <div class="section">
+      <div class="section-title">4. UX Research и тестирование</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,107,0.12)">🧪</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Maze</span>
+              <span class="tool-category-label">usability testing</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Интегрируется с Figma. Отправляешь прототип реальным пользователям, они кликают — Maze показывает heatmaps, где застревали, сколько времени тратили. Автоматизированное юзабилити-тестирование.</div>
+          <div class="tool-when">Использовать: проверка гипотез, тестирование прототипа без живой встречи</div>
+          <a class="tool-link" href="https://maze.co" target="_blank">↗ maze.co</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,179,71,0.12)">🔥</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Hotjar</span>
+              <span class="tool-category-label">аналитика поведения</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Тепловые карты кликов и скроллинга на реальных сайтах. Видео-записи сессий пользователей. Понимаешь как люди реально используют продукт — а не как думаешь что используют.</div>
+          <div class="tool-when">Использовать: анализ реального сайта/продукта, поиск проблем</div>
+          <a class="tool-link" href="https://hotjar.com" target="_blank">↗ hotjar.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">📋</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Google Forms / Typeform</span>
+              <span class="tool-category-label">опросы и анкеты</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Базовые инструменты для UX-опросов. Google Forms — простые опросы бесплатно. Typeform — красивые интерактивные анкеты. Нужно уметь составить правильные вопросы: без leading questions, с метриками.</div>
+          <div class="tool-when">Использовать: user research, сбор фидбека, скрининг респондентов</div>
+          <a class="tool-link" href="https://forms.google.com" target="_blank">↗ forms.google.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">📊</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Miro</span>
+              <span class="tool-category-label">вайтборд / воркшопы</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Онлайн-вайтборд для командных воркшопов: affinity mapping, Customer Journey Map, мозговые штурмы. Более мощный чем FigJam для ресёрча, но FigJam удобнее когда всё в Figma.</div>
+          <div class="tool-when">Использовать: командные воркшопы, affinity mapping, CJM</div>
+          <a class="tool-link" href="https://miro.com" target="_blank">↗ miro.com</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5. HANDOFF И РАБОТА С РАЗРАБАМИ -->
+    <div class="section">
+      <div class="section-title">5. Передача макетов разработчикам (Handoff)</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">👩‍💻</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Figma Dev Mode</span>
+              <span class="tool-category-label">инспект для разработчиков</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Специальный режим в Figma для разработчиков: отступы, размеры, CSS-свойства, экспорт ассетов. Дизайнер должен знать как правильно подготовить файл к handoff: правильные имена слоёв, экспорт иконок, компоненты.</div>
+          <div class="tool-when">Использовать: финальная подготовка макета для разработчиков</div>
+          <a class="tool-link" href="https://figma.com/dev-mode" target="_blank">↗ figma.com/dev-mode</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">🔤</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Базовый HTML/CSS</span>
+              <span class="tool-category-label">понимание кода</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Дизайнер не обязан программировать — но знать как работает box model, что такое padding/margin в CSS, что можно и нельзя реализовать — критически важно. Это убирает конфликты с разработчиками и улучшает дизайн.</div>
+          <div class="tool-when">Изучить: freeCodeCamp.org, первые 3 модуля бесплатно</div>
+          <a class="tool-link" href="https://freecodecamp.org" target="_blank">↗ freecodecamp.org</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,245,0.12)">📚</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Storybook</span>
+              <span class="tool-category-label">библиотека компонентов</span>
+            </div>
+            <span class="tool-priority bonus">bonus</span>
+          </div>
+          <div class="tool-desc">Инструмент разработчиков для просмотра компонентов. Дизайнеру важно понимать что это и уметь в нём ориентироваться — видеть как компоненты реально выглядят в коде, чтобы дизайн соответствовал реальности.</div>
+          <div class="tool-when">Использовать: работа с продуктовыми командами, где есть дизайн-система</div>
+          <a class="tool-link" href="https://storybook.js.org" target="_blank">↗ storybook.js.org</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,179,71,0.12)">📐</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Zeplin</span>
+              <span class="tool-category-label">handoff (альтернатива)</span>
+            </div>
+            <span class="tool-priority bonus">bonus</span>
+          </div>
+          <div class="tool-desc">Альтернатива Figma Dev Mode. Встречается в компаниях где не перешли на Dev Mode. Показывает CSS, размеры, экспортирует ассеты. Знать на уровне ориентирования.</div>
+          <div class="tool-when">Использовать: если в компании используют Zeplin вместо Dev Mode</div>
+          <a class="tool-link" href="https://zeplin.io" target="_blank">↗ zeplin.io</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 6. РЕСУРСЫ И АССЕТЫ -->
+    <div class="section">
+      <div class="section-title">6. Ресурсы и визуальные ассеты</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">🖼️</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Unsplash / Pexels</span>
+              <span class="tool-category-label">бесплатные фотографии</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Бесплатные фото высокого качества для макетов. В Figma есть плагин Unsplash — вставляешь реалистичные фото прямо в дизайн одним кликом. Обязательно для реалистичных макетов.</div>
+          <div class="tool-when">Использовать: все проекты где нужны фотографии</div>
+          <a class="tool-link" href="https://unsplash.com" target="_blank">↗ unsplash.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">✨</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Iconify / Phosphor Icons</span>
+              <span class="tool-category-label">иконки</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Iconify — плагин Figma с 200 000+ иконок из 100+ наборов: Material, Lucide, Feather, Heroicons. Phosphor — отдельная красивая система иконок. Никогда не рисовать иконки вручную — использовать готовые.</div>
+          <div class="tool-when">Использовать: во всех проектах, где нужны иконки</div>
+          <a class="tool-link" href="https://iconify.design" target="_blank">↗ iconify.design</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,107,0.12)">🎨</div>
+            <div class="tool-name-block">
+              <span class="tool-name">undraw.co / Storyset</span>
+              <span class="tool-category-label">иллюстрации</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Бесплатные векторные иллюстрации под любой проект. undraw.co — можно менять основной цвет под бренд. Storyset — иллюстрации с анимациями. Украшают онбординг, пустые состояния, лендинги.</div>
+          <div class="tool-when">Использовать: пустые состояния, онбординг, лендинг</div>
+          <a class="tool-link" href="https://undraw.co" target="_blank">↗ undraw.co</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(200,255,71,0.12)">🔤</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Google Fonts</span>
+              <span class="tool-category-label">шрифты</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">1500+ бесплатных шрифтов. Прямая интеграция с Figma через плагин. Знать топ-20 шрифтов для UI: Inter, DM Sans, Plus Jakarta Sans, Outfit, Sora. Уметь быстро подобрать пару шрифтов.</div>
+          <div class="tool-when">Использовать: выбор шрифтов для всех проектов</div>
+          <a class="tool-link" href="https://fonts.google.com" target="_blank">↗ fonts.google.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,179,71,0.12)">🎯</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Coolors.co</span>
+              <span class="tool-category-label">цветовые палитры</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Генератор цветовых палитр нажатием пробела. Проверка контраста, режим слепоты на цвета, экспорт в CSS-переменные. Незаменим при старте нового проекта. Bookmark — и использовать постоянно.</div>
+          <div class="tool-when">Использовать: старт каждого проекта при выборе цветов</div>
+          <a class="tool-link" href="https://coolors.co" target="_blank">↗ coolors.co</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(47,255,180,0.12)">🌐</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Mobbin</span>
+              <span class="tool-category-label">референсы мобильных UI</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">База скриншотов реальных мобильных приложений с фильтрами по паттернам: onboarding, checkout, empty states, search, settings. Использовать перед каждым новым экраном — посмотреть как делают другие.</div>
+          <div class="tool-when">Использовать: перед проектированием каждого нового типа экрана</div>
+          <a class="tool-link" href="https://mobbin.com" target="_blank">↗ mobbin.com</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 7. НАСМОТРЕННОСТЬ И ВДОХНОВЕНИЕ -->
+    <div class="section">
+      <div class="section-title">7. Насмотренность и вдохновение</div>
+      <div class="tool-grid">
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,107,0.12)">🏀</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Dribbble</span>
+              <span class="tool-category-label">дизайн-вдохновение</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Главная платформа для дизайн-вдохновения. Публиковать свои работы + смотреть лучшие работы мира. Алгоритм показывает похожее на то, что ты лайкаешь — настраивай под свой стиль.</div>
+          <div class="tool-when">Использовать: ежедневно по 5–10 минут</div>
+          <a class="tool-link" href="https://dribbble.com" target="_blank">↗ dribbble.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(124,111,255,0.12)">🌟</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Awwwards</span>
+              <span class="tool-category-label">лучший веб-дизайн планеты</span>
+            </div>
+            <span class="tool-priority important">important</span>
+          </div>
+          <div class="tool-desc">Сайт с лауреатами премии за лучший веб-дизайн. Очень высокая планка. Смотреть для понимания что возможно в вебе, формировать вкус. Не пытаться копировать — использовать как источник идей.</div>
+          <div class="tool-when">Использовать: 1–2 раза в неделю для расширения горизонта</div>
+          <a class="tool-link" href="https://awwwards.com" target="_blank">↗ awwwards.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(200,255,71,0.12)">📌</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Pinterest</span>
+              <span class="tool-category-label">мудборды и референсы</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Лучший инструмент для мудбордов. Создавать отдельные доски: цвет, типографика, мобильный UI, веб, иллюстрации. Алгоритм показывает похожее — со временем лента становится идеальным источником вдохновения.</div>
+          <div class="tool-when">Использовать: начало каждого проекта + ежедневная насмотренность</div>
+          <a class="tool-link" href="https://pinterest.com" target="_blank">↗ pinterest.com</a>
+        </div>
+
+        <div class="tool-item">
+          <div class="tool-item-header">
+            <div class="tool-logo" style="background:rgba(255,107,245,0.12)">🖼️</div>
+            <div class="tool-name-block">
+              <span class="tool-name">Behance</span>
+              <span class="tool-category-label">портфолио и кейсы</span>
+            </div>
+            <span class="tool-priority must">must</span>
+          </div>
+          <div class="tool-desc">Главная платформа для дизайн-портфолио. Смотреть как лучшие дизайнеры оформляют кейсы, какую структуру используют. Публиковать свои проекты — это твоё онлайн-резюме.</div>
+          <div class="tool-when">Использовать: публикация каждого кейса + изучение чужих работ</div>
+          <a class="tool-link" href="https://behance.net" target="_blank">↗ behance.net</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTION TEMPLATE -->
+    <div class="section">
+      <div class="section-title">Как использовать Notion для учёбы — система</div>
+      <div class="tool-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="tool-item">
+          <div class="tool-name" style="margin-bottom:10px">📅 Трекер задач</div>
+          <div class="tool-desc">База данных с Tasks: название → статус (To Do / In Progress / Done) → неделя → тип (теория/практика/проект). Каждую неделю планировать заранее — что буду делать.</div>
+        </div>
+        <div class="tool-item">
+          <div class="tool-name" style="margin-bottom:10px">📚 База знаний</div>
+          <div class="tool-desc">Конспекты всех уроков. Структура: Тема → Что узнала → Примеры → Ссылки. Со временем становится личным учебником — удобнее любого курса.</div>
+        </div>
+        <div class="tool-item">
+          <div class="tool-name" style="margin-bottom:10px">🚀 Дневник проектов</div>
+          <div class="tool-desc">Для каждого проекта: описание → решения → фидбек → итог. Потом из этого легко писать кейс для Behance: весь контент уже есть, нужно только оформить.</div>
+        </div>
+        <div class="tool-item">
+          <div class="tool-name" style="margin-bottom:10px">🤖 Промпт-библиотека</div>
+          <div class="tool-desc">Сохранять все AI-промпты которые сработали: для UX copy, research, генерации идей. Со временем — личная база готовых промптов для любой задачи дизайнера.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+  function showPhase(idx) {
+    document.querySelectorAll('.phase').forEach((p, i) => {
+      p.classList.toggle('active', i === idx);
+    });
+    document.querySelectorAll('.tnav-item').forEach((t, i) => {
+      t.classList.toggle('active', i === idx);
+    });
+    const colors = ['#7C6FFF','#2FFFB4','#FFB347','#FF6B6B','#FF6BF5','#6BE4FF','#C8FF47'];
+    document.querySelectorAll('.tnav-item').forEach((t, i) => {
+      t.style.borderBottomColor = i === idx ? colors[i] : 'transparent';
+    });
+  }
+
+  function toggleWeek(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.week-arrow');
+    const isOpen = body.classList.contains('open');
+    body.classList.toggle('open', !isOpen);
+    arrow.classList.toggle('open', !isOpen);
+  }
+
+  showPhase(0);
+</script>
+</body>
+</html>
