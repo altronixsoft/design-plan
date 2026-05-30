@@ -1,0 +1,1219 @@
+<!DOCTYPE html><html lang="ru"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UI/UX — Подробный план с проверкой домашек</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0F;--s1:#111118;--s2:#16161F;--s3:#1E1E2C;--b1:rgba(255,255,255,.07);--b2:rgba(255,255,255,.13);--tx:#F0EEFF;--mu:#8884AA;--p1:#7C6FFF;--p2:#FF6B6B;--p3:#2FFFB4;--p4:#FFB347;--p5:#FF6BF5;--p6:#6BE4FF;--p7:#C8FF47;--pm:#FF9F47}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.6}
+a{color:var(--p1);text-decoration:none}
+
+/* ── HERO ── */
+.hero{max-width:980px;margin:0 auto;padding:52px 28px 36px;border-bottom:1px solid var(--b1)}
+.hero-tag{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--p3);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.hero-tag::before{content:'';width:18px;height:1px;background:var(--p3)}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,46px);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:10px}
+.hero h1 em{color:var(--p1);font-style:normal}
+.hero-sub{font-size:14px;color:var(--mu);max-width:580px;line-height:1.7;margin-bottom:20px}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap}
+.hs{display:flex;flex-direction:column}
+.hs-v{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--p3)}
+.hs-l{font-size:11px;color:var(--mu)}
+
+/* ── NAV ── */
+.nav{display:flex;overflow-x:auto;max-width:980px;margin:0 auto;padding:0 28px;border-bottom:1px solid var(--b1);scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-i{padding:13px 16px;cursor:pointer;white-space:nowrap;font-size:12px;font-weight:500;color:var(--mu);border-bottom:2px solid transparent;transition:all .2s;user-select:none}
+.nav-i:hover{color:var(--tx)}
+.nav-i.on{color:var(--tx)}
+.nd{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle}
+
+/* ── MAIN ── */
+.main{max-width:980px;margin:0 auto;padding:0 28px 80px}
+.tab{display:none;padding-top:32px}.tab.on{display:block}
+
+/* ── PHASE HEADER ── */
+.ph{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--s1);border:1px solid var(--b1);border-radius:14px;margin-bottom:24px;position:relative;overflow:hidden}
+.ph::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.t1 .ph::before{background:var(--p1)}.t2 .ph::before{background:var(--p3)}.t3 .ph::before{background:var(--p4)}.t4 .ph::before{background:var(--p2)}.t5 .ph::before{background:var(--p5)}.t6 .ph::before{background:var(--p6)}.t7 .ph::before{background:var(--p7)}.t8 .ph::before{background:var(--pm)}
+.ph-num{font-family:'Space Mono',monospace;font-size:38px;font-weight:700;opacity:.1;flex-shrink:0;width:50px;line-height:1}
+.ph-body h2{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:4px}
+.ph-body p{font-size:12px;color:var(--mu);line-height:1.6;margin-bottom:10px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:10px;font-family:'Space Mono',monospace;padding:2px 8px;border-radius:20px;border:1px solid var(--b2);color:var(--mu)}
+
+/* ── SECTION ── */
+.sec{margin-bottom:22px}
+.sec-t{font-size:10px;font-family:'Space Mono',monospace;letter-spacing:2px;text-transform:uppercase;color:var(--mu);margin-bottom:11px;padding-bottom:6px;border-bottom:1px solid var(--b1);display:flex;align-items:center;gap:6px}
+.sec-t::before{content:'//';opacity:.4}
+
+/* ── RESOURCES ── */
+.rlist{display:flex;flex-direction:column;gap:7px}
+.rc{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:12px 14px;display:grid;grid-template-columns:32px 1fr auto;gap:10px;align-items:start}
+.rc-ico{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.ico-yt{background:rgba(255,0,0,.08)}.ico-bk{background:rgba(124,111,255,.08)}.ico-tl{background:rgba(47,255,180,.08)}
+.rc-t{font-weight:600;font-size:13px;margin-bottom:2px}.rc-d{font-size:11px;color:var(--mu);line-height:1.5}
+.chip{display:inline-flex;align-items:center;font-size:10px;font-family:'Space Mono',monospace;color:var(--p1);padding:2px 7px;border:1px solid rgba(124,111,255,.2);border-radius:4px;margin-top:4px;margin-right:5px;transition:all .15s}
+.chip:hover{background:rgba(124,111,255,.1)}
+.rbdg{font-size:9px;padding:3px 7px;border-radius:10px;font-weight:600;white-space:nowrap;align-self:flex-start}
+.f{background:rgba(47,255,180,.1);color:var(--p3)}.p{background:rgba(255,107,107,.1);color:var(--p2)}.fp{background:rgba(255,179,71,.1);color:var(--p4)}
+
+/* ── TOPICS ── */
+.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.topic{background:var(--s1);border:1px solid var(--b1);border-radius:8px;padding:9px 11px;font-size:12px;display:flex;align-items:center;gap:7px}
+
+/* ── WEEKS ── */
+.weeks{display:flex;flex-direction:column;gap:9px}
+.wk{background:var(--s1);border:1px solid var(--b1);border-radius:11px;overflow:hidden}
+.wk-h{display:flex;align-items:center;gap:11px;padding:13px 16px;cursor:pointer;user-select:none;transition:background .15s}
+.wk-h:hover{background:var(--s2)}
+.wk-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--mu);min-width:70px}
+.wk-title{flex:1;font-weight:500;font-size:13px}
+.wk-arr{color:var(--mu);font-size:11px;transition:transform .2s}
+.wk-arr.open{transform:rotate(180deg)}
+.wk-body{display:none;padding:0 16px 16px;border-top:1px solid var(--b1)}
+.wk-body.open{display:block}
+
+/* ── TASK CARD ── */
+.task{margin-top:14px;border:1px solid var(--b1);border-radius:9px;overflow:hidden}
+.task-h{display:flex;align-items:center;gap:9px;padding:10px 13px;background:var(--s2)}
+.bdg{font-size:9px;font-family:'Space Mono',monospace;padding:3px 7px;border-radius:5px;font-weight:700;flex-shrink:0}
+.b-study{background:rgba(124,111,255,.15);color:var(--p1);border:1px solid rgba(124,111,255,.2)}
+.b-prac{background:rgba(47,255,180,.15);color:var(--p3);border:1px solid rgba(47,255,180,.2)}
+.b-proj{background:rgba(255,107,107,.15);color:var(--p2);border:1px solid rgba(255,107,107,.2)}
+.b-ai{background:rgba(255,107,245,.15);color:var(--p5);border:1px solid rgba(255,107,245,.2)}
+.task-title{font-size:13px;font-weight:600;flex:1}
+.task-body{padding:13px}
+.task-desc{font-size:12px;color:var(--mu);line-height:1.6;margin-bottom:11px}
+.steps{display:flex;flex-direction:column;gap:5px;margin-bottom:10px}
+.step{display:flex;gap:8px;font-size:12px;line-height:1.55;padding:8px 10px;background:var(--s2);border-radius:6px;align-items:flex-start}
+.sn{width:17px;height:17px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:'Space Mono',monospace;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ── CHECK BLOCK ── */
+.ck{margin-top:10px;border:1px solid rgba(47,255,180,.15);border-radius:9px;overflow:hidden}
+.ck-h{display:flex;align-items:center;gap:8px;padding:9px 13px;background:rgba(47,255,180,.04);cursor:pointer;user-select:none}
+.ck-h:hover{background:rgba(47,255,180,.07)}
+.ck-lbl{font-size:11px;font-family:'Space Mono',monospace;color:var(--p3);font-weight:600;flex:1}
+.ck-arr{font-size:10px;color:var(--p3);transition:transform .2s}
+.ck-arr.open{transform:rotate(180deg)}
+.ck-body{display:none;padding:13px;border-top:1px solid rgba(47,255,180,.1)}
+.ck-body.open{display:block}
+.ck-hint{font-size:11px;color:var(--mu);line-height:1.55;padding:8px 10px;background:rgba(47,255,180,.04);border-radius:6px;border-left:2px solid var(--p3);margin-bottom:11px}
+.cl{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.ci{display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.5;padding:7px 10px;background:var(--s2);border-radius:6px}
+.cb{width:15px;height:15px;border:1px solid var(--b2);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:8px;cursor:pointer;transition:all .15s}
+.cb.on{background:var(--p3);border-color:var(--p3);color:#0A0A0F}
+.ci-good{color:var(--p3);font-size:10px;display:block;margin-top:2px;opacity:.8}
+.ci-bad{color:var(--p2);font-size:10px;display:block;margin-top:2px;opacity:.8}
+
+/* ── AI PROMPT ── */
+.ai-b{background:rgba(255,107,245,.05);border:1px solid rgba(255,107,245,.15);border-radius:8px;padding:11px}
+.ai-lbl{font-size:9px;font-family:'Space Mono',monospace;color:var(--p5);margin-bottom:7px;display:flex;align-items:center;gap:5px}
+.ai-txt{font-size:11px;color:var(--mu);line-height:1.6;font-style:italic;background:var(--s2);border-radius:5px;padding:9px 11px;margin-bottom:7px;cursor:text;user-select:all}
+.copy-btn{font-size:10px;font-family:'Space Mono',monospace;color:var(--p5);background:rgba(255,107,245,.1);border:1px solid rgba(255,107,245,.2);border-radius:4px;padding:4px 9px;cursor:pointer;transition:all .15s}
+.copy-btn:hover{background:rgba(255,107,245,.2)}
+.copy-btn.done{color:var(--p3);background:rgba(47,255,180,.1);border-color:rgba(47,255,180,.2)}
+
+/* ── TOOLS ── */
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:9px}
+.ti2{background:var(--s1);border:1px solid var(--b1);border-radius:11px;padding:13px 15px}
+.ti2-h{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.ti2-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ti2-name{font-weight:600;font-size:13px;display:block;margin-bottom:1px}
+.ti2-cat{font-size:9px;color:var(--mu);font-family:'Space Mono',monospace}
+.pri{font-size:9px;padding:3px 7px;border-radius:10px;font-weight:600;font-family:'Space Mono',monospace;align-self:flex-start}
+.must{background:rgba(255,107,107,.15);color:var(--p2);border:1px solid rgba(255,107,107,.2)}
+.imp{background:rgba(255,179,71,.15);color:var(--p4);border:1px solid rgba(255,179,71,.2)}
+.bon{background:rgba(47,255,180,.15);color:var(--p3);border:1px solid rgba(47,255,180,.2)}
+.ti2-d{font-size:11px;color:var(--mu);line-height:1.5;margin-bottom:7px}
+.ti2-w{font-size:10px;color:var(--tx);opacity:.6;border-left:2px solid var(--b2);padding-left:7px;line-height:1.4;margin-bottom:7px}
+.tl{display:inline-flex;align-items:center;font-size:10px;font-family:'Space Mono',monospace;color:var(--p1);padding:2px 7px;border:1px solid rgba(124,111,255,.2);border-radius:4px;transition:all .15s}
+.tl:hover{background:rgba(124,111,255,.1)}
+
+/* ── MATRIX ── */
+.matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.mc{background:var(--s1);border:1px solid var(--b1);border-radius:10px;padding:11px}
+.mc-t{font-size:10px;font-family:'Space Mono',monospace;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--b1)}
+.mi{font-size:11px;padding:3px 0;color:var(--mu);display:flex;gap:5px;border-bottom:1px solid var(--b1);line-height:1.4}
+.mi:last-child{border:none}
+
+/* ── MENTOR ── */
+.mentor-card{background:var(--s2);border:1px solid rgba(200,255,71,.13);border-radius:11px;padding:18px;margin-bottom:20px}
+.mentor-t{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--p7);margin-bottom:8px}
+.mentor-d{font-size:12px;color:var(--mu);line-height:1.6;margin-bottom:12px}
+.tips{display:flex;flex-direction:column;gap:5px}
+.tip{font-size:12px;padding:7px 10px;background:var(--s1);border-radius:6px;display:flex;gap:8px;line-height:1.5}
+
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px;padding:9px 13px;background:var(--s1);border:1px solid var(--b1);border-radius:8px}
+.leg-i{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--mu)}
+
+@media(max-width:600px){
+  .hero,.main{padding-left:16px;padding-right:16px}
+  .nav{padding:0 16px}
+  .ph-num{display:none}
+  .matrix{grid-template-columns:1fr}
+  .tool-grid{grid-template-columns:1fr}
+  .topic-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style></head><body>
+<div class="hero">
+  <div class="hero-tag">UI/UX Roadmap 2025–2026</div>
+  <h1>Детальный план обучения<br><em>с проверкой домашек</em></h1>
+  <div class="hero-sub">Каждое задание расписано пошагово. У каждого — чеклист проверки и готовый AI-промпт, чтобы ты мог проверить работу даже без знания дизайна.</div>
+  <div class="hero-stats">
+    <div class="hs"><span class="hs-v">10–12</span><span class="hs-l">месяцев</span></div>
+    <div class="hs"><span class="hs-v">6</span><span class="hs-l">фаз</span></div>
+    <div class="hs"><span class="hs-v">3–5</span><span class="hs-l">кейсов</span></div>
+    <div class="hs"><span class="hs-v">✓</span><span class="hs-l">чеклисты + AI</span></div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-i on" onclick="st(0)"><span class="nd" style="background:var(--p1)"></span>Основы</div>
+  <div class="nav-i" onclick="st(1)"><span class="nd" style="background:var(--p3)"></span>Figma</div>
+  <div class="nav-i" onclick="st(2)"><span class="nd" style="background:var(--p4)"></span>UX процесс</div>
+  <div class="nav-i" onclick="st(3)"><span class="nd" style="background:var(--p2)"></span>UI система</div>
+  <div class="nav-i" onclick="st(4)"><span class="nd" style="background:var(--p5)"></span>AI + Дизайн</div>
+  <div class="nav-i" onclick="st(5)"><span class="nd" style="background:var(--p6)"></span>Портфолио</div>
+  <div class="nav-i" onclick="st(6)"><span class="nd" style="background:var(--p7)"></span>Инструменты</div>
+  <div class="nav-i" onclick="st(7)"><span class="nd" style="background:var(--pm)"></span>Гид ментора</div>
+</div>
+
+<div class="main">
+<!-- ═══════ TAB 1: ОСНОВЫ ═══════ -->
+<div class="tab t1 on" id="t0">
+<div class="ph"><div class="ph-num">01</div><div class="ph-body"><h2>Основы визуала и дизайн-мышления</h2><p>Прежде чем открыть Figma — нужно "поставить глаз". Цвет, типографика, композиция — фундамент без которого всё рассыпается.</p><div class="tags"><span class="tag">Недели 1–6</span><span class="tag">2–3 ч/нед</span><span class="tag">Canva, Pinterest</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Что изучаем</div>
+<div class="topic-grid">
+  <div class="topic">🎨 Теория цвета</div><div class="topic">🔤 Типографика</div>
+  <div class="topic">📐 Композиция</div><div class="topic">📏 Отступы/сетки</div>
+  <div class="topic">👁️ Иерархия</div><div class="topic">🖼️ Анализ UI</div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Ресурси — основи дизайну</div>
+<div class="rlist">
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">frusia.pro — безкоштовний курс UX/UI і Figma</div><div class="rc-d">26 структурованих уроків від практикуючого дизайнера Люби Фурсеєвої. Основи UX/UI + Figma в одному курсі. Є домашні завдання. Сотні позитивних відгуків. <strong>Починати саме звідси.</strong><br><a class="chip" href="https://frusia.pro/en/p/6" target="_blank">↗ frusia.pro</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">UXPUB — спільнота дизайнерів України</div><div class="rc-d">Найбільша україномовна спільнота UX/UI дизайнерів. Сотні статей про колір, типографіку, UX-дослідження, Figma. Читати щодня по 1 статті.<br><a class="chip" href="https://ux.pub" target="_blank">↗ ux.pub</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">📖</div><div><div class="rc-t">Tilda Education — Колір і Типографіка</div><div class="rc-d">Безкоштовні текстові статті-курси від команди Tilda: колір в інтерфейсах, типографіка, композиція. Написано зрозуміло, з прикладами, без реєстрації. На русском.<br><a class="chip" href="https://tilda.education/courses/web-design/color/" target="_blank">↗ tilda.education → Цвет</a><a class="chip" href="https://tilda.education/courses/web-design/typography/" target="_blank">↗ Типографика</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">📖</div><div><div class="rc-t">Stepik — Теорія цифрового дизайну</div><div class="rc-d">Структурований безкоштовний відеокурс: теорія кольору + типографіка + композиція. З тестами та практичними завданнями. На русском.<br><a class="chip" href="https://stepik.org/course/104844" target="_blank">↗ stepik.org/course/104844</a></div></div><span class="rbdg f">безкоштовно</span></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Домашние задания</div>
+<div class="weeks">
+
+<!-- W1 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Неделя 1</span><span class="wk-title">Теория цвета — конспект и анализ приложений</span><span class="wk-arr open">▼</span></div>
+<div class="wk-body open">
+
+<div class="task">
+<div class="task-h"><span class="bdg b-study">📖 теория</span><span class="task-title">Конспект по теории цвета</span></div>
+<div class="task-body">
+<div class="task-desc">Подивитись відео UPROCK або прочитати статтю на tilda.education про колір. Написати конспект в Notion своїми словами — не копіювати, а переформулювати.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Відкрити frusia.pro → перший модуль "Вступ до UX/UI". Прочитати уроки 1–3. Або: Stepik.org → "Теория цифрового дизайна" → модуль "Цвет" (~40 хв)</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Записать в Notion: первичные/вторичные цвета, тёплые/холодные, контраст, 3 типа схем (монохром, аналогичная, контрастная)</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>К каждому понятию добавить пример из реального приложения — не абстрактно, а "вот в Instagram это работает так"</span></div>
+</div>
+<a class="chip" href="https://youtube.com/@uprock" target="_blank">↗ youtube.com/@uprock</a>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить — чеклист</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Попроси показать Notion и задай 2–3 вопроса вслух. Не нужно знать правильный ответ — достаточно слушать объясняет ли она своими словами или зачитывает.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Называет 3 типа цветовых схем без подсказки<span class="ci-good">✓ "монохром — оттенки одного цвета, контрастная — противоположные на колесе"</span><span class="ci-bad">✗ "не помню" → пересмотреть видео и переписать</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Может привести пример тёплых и холодных цветов из реальных брендов<span class="ci-good">✓ "McDonald's = красный+жёлтый = энергия и аппетит; Notion = чёрно-белый = строгость"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>В конспекте минимум 5 пунктов, написанных своими словами<span class="ci-bad">✗ Если текст явно скопирован из видео — попросить переписать</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>К каждому понятию есть конкретный пример — не просто определение</div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт → вставить в Claude или ChatGPT</div>
+<div class="ai-txt" id="p1w1a">Я ментор начинающего UI/UX дизайнера (13 лет). Сам я бэкенд-разработчик без знания дизайна. Она написала конспект по теории цвета для UI — вот текст: [ВСТАВЬ КОНСПЕКТ]. Оцени по 3 пунктам: 1) Охвачены ли ключевые понятия цветовой теории нужные для UI? 2) Написано своими словами или скопировано? 3) Что важное упустила — добавь 2–3 темы которые стоит изучить. Отвечай просто, без дизайн-жаргона — я не дизайнер.</div>
+<button class="copy-btn" onclick="cp('p1w1a',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<div class="task" style="margin-top:10px">
+<div class="task-h"><span class="bdg b-prac">✏️ практика</span><span class="task-title">Анализ цвета в 3 реальных приложениях</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">1</div><span>Выбрать 3 контрастных приложения: яркое (Duolingo), минималистичное (Notion), тёмное (Spotify)</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">2</div><span>Для каждого: скриншот главного экрана + записать в Notion — основной цвет / вторичный / фон / текст</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">3</div><span>Ответить для каждого: ПОЧЕМУ именно эти цвета? Какое настроение создают? Кто целевая аудитория?</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">4</div><span>На Khroma.co создать 5 палитр, выбрать 1 понравившуюся. Написать — для какого типа приложения подошла бы</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Проверяй не "правильность" цветов — а глубину рассуждений. Если она может объяснить ЗАЧЕМ — всё идёт правильно.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Разобраны 3 заметно разных приложения, есть скриншоты<span class="ci-bad">✗ Если все три похожи по стилю — попросить выбрать более контрастные</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Для каждого названы минимум 3 цвета (основной, вторичный, фон)<span class="ci-good">✓ "#1CB0F6 — синий Duolingo, используется для всех кнопок и прогресса"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Есть объяснение ЗАЧЕМ такие цвета — не просто перечисление<span class="ci-good">✓ "зелёный Duolingo — ощущение роста, как природа"</span><span class="ci-bad">✗ "у Spotify чёрный фон" — слишком поверхностно</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Палитра из Khroma создана и прокомментирована</div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт для проверки анализа</div>
+<div class="ai-txt" id="p1w1b">Начинающий UI/UX дизайнер (13 лет) разобрала цветовые схемы 3 приложений. Вот её работа: [ВСТАВЬ ТЕКСТ ИЛИ ОПИШИ]. Оцени: 1) Видит ли она цвет как систему, или просто называет цвета? 2) Есть ли понимание ЗАЧЕМ такие цвета в каждом случае? 3) Конкретные рекомендации что улучшить — максимум 3 пункта. Я бэкендер, не дизайнер.</div>
+<button class="copy-btn" onclick="cp('p1w1b',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+</div></div><!-- /W1 -->
+
+<!-- W2 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Неделя 2</span><span class="wk-title">Типографика — иерархия и шрифтовые пары</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+
+<div class="task">
+<div class="task-h"><span class="bdg b-study">📖 теория</span><span class="task-title">Конспект: типографика в UI</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Відкрити tilda.education → "Типографика" (tilda.education/courses/web-design/typography). Прочитати 2–3 статті. Записати: line-height, letter-spacing, шкала H1/H2/H3/body/caption, різниця serif і sans-serif</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Открыть fonts.google.com → поставить в режим предпросмотра разные шрифты. Найти 5 которые нравятся</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Сделать скриншоты 3 сайтов и РАЗМЕТИТЬ прямо на скриншоте: "это H1", "это caption". Написать — есть ли чёткая иерархия на каждом</span></div>
+</div>
+<a class="chip" href="https://fonts.google.com" target="_blank">↗ fonts.google.com</a>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Объясняет разницу H1 и caption своими словами<span class="ci-good">✓ "H1 — самый крупный заголовок страницы, caption — маленький пояснительный текст под картинкой"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Знает зачем line-height — межстрочный интервал<span class="ci-good">✓ "чтобы строки не сливались и текст было удобно читать"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Различает serif и sans-serif, знает где каждый уместен<span class="ci-good">✓ "serif — газеты, книги, классика; sans-serif — интерфейсы, мобильные"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>На скриншотах видна разметка уровней текста</div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт</div>
+<div class="ai-txt" id="p1w2a">Проверь понимание типографики начинающего UI/UX дизайнера (13 лет). Вот её конспект: [ВСТАВЬ ТЕКСТ]. Скажи: 1) Правильно ли она понимает визуальную иерархию в типографике? 2) Есть ли понимание практического применения в UI? 3) Что добавить — 2–3 темы которые важны для работы. Объясни как программисту без знания дизайна.</div>
+<button class="copy-btn" onclick="cp('p1w2a',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<div class="task" style="margin-top:10px">
+<div class="task-h"><span class="bdg b-prac">✏️ практика</span><span class="task-title">3 шрифтовые пары + сравнительные карточки</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">1</div><span>На fonts.google.com подобрать 3 разных пары шрифтов (заголовочный + текстовый). Все три — разного характера</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">2</div><span>В Canva создать 3 карточки с одинаковым текстом но разными парами. Сравнить как они ощущаются</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">3</div><span>Для каждой пары написать: стиль (современный/классический/игривый) и для какого приложения подошла бы</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>3 пары заметно отличаются по характеру — не все в одном стиле<span class="ci-bad">✗ Если все три похожи — попросить найти более контрастные</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>К каждой паре есть обоснование для какого продукта подойдёт<span class="ci-good">✓ "Playfair + Lato — для приложения о книгах: заголовок элегантный, текст читабельный"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Карточки созданы и показывают разницу между парами визуально</div></div>
+</div>
+</div></div>
+</div></div>
+
+</div></div><!-- /W2 -->
+
+<!-- W3 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Неделя 3</span><span class="wk-title">Первая работа — карточка товара в Canva</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+
+<div class="task">
+<div class="task-h"><span class="bdg b-proj">🚀 мини-проект</span><span class="task-title">Карточка товара с применением всех основ</span></div>
+<div class="task-body">
+<div class="task-desc">Первая реальная практическая работа. Применить цвет, типографику и композицию одновременно в одном дизайне.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Canva.com → "Создать дизайн" → Custom size 400×500px</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Создать карточку товара: картинка + название + короткое описание + цена + кнопка "Купить". Любой товар на выбор</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Применить правила: не больше 3 цветов, 3 разных размера текста, одинаковые отступы со всех сторон</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Найти похожую карточку на Rozetka.ua или Prom.ua. Поставить рядом свою и настоящую. Написать в Notion: 3 отличия, что лучше/хуже в своей работе</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">5</div><span>Сохранить как PNG — это первая работа в хронике прогресса</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить — смотри глазами покупателя</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Попроси любого человека (соседа, родственника) посмотреть 5 секунд и ответить: что это? сколько стоит? как купить? Если понял без объяснений — дизайн работает.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>С первого взгляда понятно что за товар и сколько стоит<span class="ci-good">✓ Цена выделена, не надо её искать</span><span class="ci-bad">✗ Цена такого же размера как описание = нет иерархии</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Кнопка "Купить" заметна и не сливается с фоном<span class="ci-bad">✗ Кнопка серая на сером = проблема контраста → переделать</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Использовано не больше 3 цветов<span class="ci-bad">✗ Если больше — убрать лишние</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Есть письменный анализ сравнения с реальным сайтом<span class="ci-good">✓ Самоанализ важнее качества работы на этом этапе</span></div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт (загрузи скриншот работы)</div>
+<div class="ai-txt" id="p1w3">Это первая практическая работа начинающего UI-дизайнера (13 лет) — карточка товара в Canva. [ПРИКРЕПИ СКРИНШОТ]. Оцени: 1) Визуальная иерархия — сразу ли ясно что важнее: название, цена или кнопка? 2) Цвет — не больше 3 цветов, кнопка выделяется? 3) Отступы — одинаковые от краёв? 4) Типографика — разные размеры для разных уровней? Дай конкретный фидбек что хорошо и что улучшить. Это работа начинающего, критикуй конструктивно.</div>
+<button class="copy-btn" onclick="cp('p1w3',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+</div></div><!-- /W3 -->
+
+<!-- W4-6 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 4–6</span><span class="wk-title">Насмотренность + итоговый мудборд</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+
+<div class="task">
+<div class="task-h"><span class="bdg b-prac">✏️ ежедневно</span><span class="task-title">10-минутный ритуал насмотренности</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">1</div><span>Каждый день 10 минут: Dribbble.com или Mobbin.com → просмотреть 10–15 работ, сохранять в Pinterest что нравится</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">2</div><span>Раз в неделю писать в Notion 3 наблюдения: что общего у работ которые нравятся? Цвета? Стиль? Форма?</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">3</div><span>К концу 6-й недели — минимум 60 сохранений в Pinterest</span></div>
+</div>
+</div></div>
+
+<div class="task" style="margin-top:10px">
+<div class="task-h"><span class="bdg b-proj">🚀 итог фазы 1</span><span class="task-title">Мудборд "Мой дизайн-стиль"</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Создать доску Pinterest "Мой дизайн-стиль". 4 секции: Цвет / Типографика / Мобильный UI / Веб — в каждой минимум 10 изображений</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Написать в Notion "Мой дизайн-стиль" — 5–7 предложений: какие цвета нравятся, какая типографика, общий стиль интерфейсов</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Сделать итоговую карточку в Canva: выбрать 3 цвета + 1 пару шрифтов которые будет использовать в следующих проектах</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить итог фазы</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>4 секции в Pinterest, в каждой 10+ изображений<span class="ci-bad">✗ Если все изображения одного стиля — попросить добавить разнообразие</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Описание стиля конкретное, не абстрактное<span class="ci-good">✓ "Нравится минимализм, большие отступы, тёмный фон, один акцентный цвет — зелёный или синий"</span><span class="ci-bad">✗ "Нравится красивый дизайн" — слишком расплывчато</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Может объяснить 2–3 конкретных выбора из мудборда вслух<span class="ci-good">✓ Покажи любое изображение: "почему именно это сохранила?"</span></div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт для итога фазы 1</div>
+<div class="ai-txt" id="p1fin">Начинающий дизайнер (13 лет) завершила первую фазу — основы визуального дизайна. Вот её описание своего стиля: [ВСТАВЬ ТЕКСТ]. Список тем работ из мудборда: [ПЕРЕЧИСЛИ]. Оцени: 1) Насколько чёткое понимание своего стиля? 2) Соответствует ли стиль тому что востребовано в реальной индустрии? 3) Готова ли переходить к изучению Figma или нужно ещё поработать на этом этапе? Я бэкендер без знания дизайна.</div>
+<button class="copy-btn" onclick="cp('p1fin',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+</div></div><!-- /W4-6 -->
+
+</div></div></div><!-- /TAB1 -->
+<!-- ═══════ TAB 2: FIGMA ═══════ -->
+<div class="tab t2" id="t1">
+<div class="ph"><div class="ph-num">02</div><div class="ph-body"><h2>Figma — от нуля до уверенного пользователя</h2><p>Главный инструмент индустрии. Нужно не просто нажимать кнопки — а мыслить в логике компонентов, Auto Layout и дизайн-систем.</p><div class="tags"><span class="tag">Недели 7–16</span><span class="tag">3–4 ч/нед</span><span class="tag">Figma бесплатно</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Ресурси — Figma</div>
+<div class="rlist">
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">frusia.pro — модуль 2: Основи Figma</div><div class="rc-d">Після загального вступу — одразу переходь до модуля 2 на frusia.pro. 15+ уроків по Figma з домашніми завданнями та перевіркою. Найкраще украіномовне джерело.<br><a class="chip" href="https://frusia.pro/en/p/6" target="_blank">↗ frusia.pro → модуль 2</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-yt">🇺🇦</div><div><div class="rc-t">YouTube — Безкоштовний курс Figma українською (2024)</div><div class="rc-d">Плейлист з повним курсом Figma для початківців українською мовою. Актуальний контент 2024 року — Figma Community, Auto Layout, компоненти.<br><a class="chip" href="https://youtube.com/playlist?list=PLfRInF5PWqfcL4L9a_8EdwmMjhKFiW6zd" target="_blank">↗ youtube — плейлист UA</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-yt">▶</div><div><div class="rc-t">VideoSmile — Figma з нуля за 90 хвилин (2025)</div><div class="rc-d">Якщо потрібно швидко — цей відеоурок на русском найкраще пояснює інтерфейс, фрейми, Auto Layout та плагіни. Оновлено під Figma 2025.<br><a class="chip" href="https://www.youtube.com/watch?v=4-NUlgWbncs" target="_blank">↗ youtube — 90 хв</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">📖</div><div><div class="rc-t">Stepik — Курс по Figma з нуля</div><div class="rc-d">Структурований курс: відеоуроки до 10 хв, тести, практика — зробити лендинг. На русском. Зручно вчитись у своєму темпі.<br><a class="chip" href="https://stepik.org/course/250391" target="_blank">↗ stepik.org/course/250391</a></div></div><span class="rbdg f">безкоштовно</span></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Домашние задания</div>
+<div class="weeks">
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 7–8</span><span class="wk-title">Первое знакомство — скопировать реальный интерфейс</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task">
+<div class="task-h"><span class="bdg b-prac">✏️ практика</span><span class="task-title">UI Copy — воссоздать экран калькулятора</span></div>
+<div class="task-body">
+<div class="task-desc">Лучшее упражнение для новичка — точное воспроизведение реального UI. Учит работать с сеткой, цветом, пространством одновременно без необходимости придумывать дизайн.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">1</div><span>Пройти первые 4 урока официального курса Figma (создать аккаунт, изучить панели инструментов)</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">2</div><span>Сделать скриншот встроенного калькулятора iOS или Android</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">3</div><span>Воспроизвести этот экран в Figma максимально близко: прямоугольники, текст, правильные цвета. Дать осмысленные имена слоям</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">4</div><span>Поставить оригинал и копию рядом. Найти и записать 5 отличий — что не получилось и почему</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Попроси прислать ссылку на Figma-файл (figma.com/file/...). Открой в браузере — работа должна быть видна без входа в аккаунт.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Работа открыта именно в Figma (не в Canva или другом инструменте)<span class="ci-good">✓ URL должен начинаться с figma.com/file/</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Общая структура узнаваема — кнопки, дисплей, цифры понятны<span class="ci-bad">✗ Если непонятно что это калькулятор — структура не проработана</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Слои названы осмысленно — не "Rectangle 1", "Frame 23"<span class="ci-good">✓ Достаточно "btn-7", "display", "btn-plus"</span><span class="ci-bad">✗ Все слои "Rectangle 47" → объяснить важность именования</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Написан список из 5 отличий от оригинала — самоанализ<span class="ci-good">✓ Наличие честного самоанализа важнее качества самой работы</span></div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт (прикрепи скриншот работы)</div>
+<div class="ai-txt" id="p2w78">Это первая работа в Figma начинающего дизайнера (13 лет) — копия экрана калькулятора. [СКРИНШОТ]. Оцени: 1) Угадывается ли структура оригинала в этой копии? 2) Аккуратна ли расстановка элементов? 3) На что в первую очередь обратить внимание для улучшения? Это первая неделя в инструменте — не требуй профессионального уровня.</div>
+<button class="copy-btn" onclick="cp('p2w78',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+</div></div><!-- /W7-8 -->
+
+<!-- W9-10 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 9–10</span><span class="wk-title">Auto Layout — главная суперсила Figma</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task">
+<div class="task-h"><span class="bdg b-prac">✏️ практика</span><span class="task-title">Карточка товара и навбар через Auto Layout</span></div>
+<div class="task-body">
+<div class="task-desc">Auto Layout — это то что отделяет новичка от специалиста. После этого задания дизайн перестанет "рассыпаться" при изменении текста.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">1</div><span>Подивитись урок VideoSmile про Auto Layout (~40 хв) або Stepik-курс. Паралельно повторювати ті ж дії у своїй Figma</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">2</div><span>Задание А: Карточка товара через Auto Layout (картинка 200px + название + цена + кнопка). Проверка: изменить длину названия — карточка должна подстроиться автоматически</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">3</div><span>Задание Б: Навбар с лого + 4 пункта меню + кнопка. Через Auto Layout + Constraints чтобы тянулся по ширине фрейма</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">4</div><span>Записать короткое видео экрана: показать как карточка растягивается при изменении текста</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Главный тест Auto Layout</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Попроси прямо в Figma поменять длину текста названия в карточке. Если размер карточки подстроился — Auto Layout используется. Если всё "съехало" — не используется.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>При изменении текста карточка подстраивается автоматически<span class="ci-good">✓ Это и есть Auto Layout — главный признак правильного выполнения</span><span class="ci-bad">✗ Карточка не реагирует = Auto Layout не подключён → переделать</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>В правой панели Figma видна секция "Auto layout" при выделении фрейма<span class="ci-good">✓ Попроси показать скриншот правой панели</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Навбар тянется по ширине при изменении размера фрейма<span class="ci-bad">✗ Элементы "плывут" = Constraints не настроены</span></div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт</div>
+<div class="ai-txt" id="p2w910">Начинающий дизайнер (13 лет) делает Auto Layout в Figma. [СКРИНШОТ РАБОТЫ]. Скажи: 1) По виду — используется Auto Layout или элементы просто расставлены вручную? Признаки: одинаковые отступы, выровненность. 2) Что улучшить в карточке товара с точки зрения UI? 3) Один конкретный совет для навбара. Я не знаю Figma — объясни что проверить.</div>
+<button class="copy-btn" onclick="cp('p2w910',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+</div></div><!-- /W9-10 -->
+
+<!-- W11-12 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 11–12</span><span class="wk-title">Компоненты — библиотека кнопок, инпутов и аватаров</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task">
+<div class="task-h"><span class="bdg b-proj">🚀 мини-проект</span><span class="task-title">Мини-библиотека компонентов</span></div>
+<div class="task-body">
+<div class="task-desc">Компоненты — это как переменные и функции в программировании. Меняешь один → меняются все копии. Это основа любой дизайн-системы.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Изучить уроки по Components и Variants в официальном курсе Figma</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Создать компонент "Кнопка": 3 размера (S/M/L) × 3 состояния (Default/Hover/Disabled) = 9 вариантов. Именование: Button/Primary/Large/Default</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Создать компонент "Input": состояния Normal/Focused/Error. С иконкой и без — тоже разные варианты</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Собрать из этих компонентов форму входа: email + пароль + кнопка "Войти". Использовать именно инстансы компонентов</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Попроси открыть Figma и ИЗМЕНИТЬ основной компонент кнопки (например поменять цвет). Все копии на форме входа должны обновиться автоматически. Если не обновились — форма собрана не из компонентов.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Изменение основного компонента кнопки меняет все её копии<span class="ci-good">✓ Это ключевой тест — именно так работают компоненты</span><span class="ci-bad">✗ Копии не меняются = форма собрана из обычных фреймов, не компонентов</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Кнопка имеет минимум 3 визуально разных состояния (Disabled — серый/полупрозрачный)<span class="ci-good">✓ Попроси показать все варианты в "сетке"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Именование слоёв использует "/" для иерархии<span class="ci-good">✓ "Button/Primary/Large/Default" — не просто "Кнопка большая"</span><span class="ci-bad">✗ Слои "Frame 23" = объяснить систему именования</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Форма входа выглядит цельно — одинаковые отступы, выровненные элементы</div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт</div>
+<div class="ai-txt" id="p2w1112">Начинающий дизайнер (13 лет) создала библиотеку компонентов в Figma и форму входа. [СКРИНШОТ]. Оцени: 1) Выглядят ли компоненты консистентно — одинаковый радиус углов, цвета, стиль? 2) Есть ли чёткие состояния у кнопки (active/disabled)? 3) Форма входа — понятна ли задача с первого взгляда? 4) Главное что улучшить. Я не дизайнер.</div>
+<button class="copy-btn" onclick="cp('p2w1112',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+</div></div><!-- /W11-12 -->
+
+<!-- W13-16 -->
+<div class="wk">
+<div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 13–16</span><span class="wk-title">Итог фазы: 8 экранов + рабочий прототип</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task">
+<div class="task-h"><span class="bdg b-proj">🚀 главный проект фазы</span><span class="task-title">Копия реального приложения с переходами</span></div>
+<div class="task-body">
+<div class="task-desc">Финал фазы. Выбрать реальное приложение и воссоздать его в Figma. Цель — не пиксель-перфект, а правильная структура, компоненты и рабочие переходы между экранами.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Выбрать приложение (Duolingo, Spotify, Notion). Сделать скриншоты 8 разных экранов</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Воссоздать все 8 экранов. Требования: правильные мобильные фреймы (375×812), Auto Layout, компоненты для кнопок и навбара</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Связать экраны прототипом: нажатие кнопок ведёт к следующему экрану (Prototype tab в Figma)</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Нажать "▶ Present" в Figma — пройти от первого до последнего экрана кликами, как реальный пользователь</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">5</div><span>Написать: что было самым сложным? Что хочется сделать по-другому в следующем проекте?</span></div>
+</div>
+<div class="ck">
+<div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Попроси прислать ссылку на прототип Figma. Открой в браузере и нажми "▶ Present" — ты сам можешь пройти прототип кликами без дополнительных инструментов.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Ровно 8 экранов в Figma — каждый отдельный мобильный фрейм<span class="ci-good">✓ Размер 375×812 или 390×844 (стандарт iPhone)</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Прототип работает: клик по кнопке ведёт к следующему экрану<span class="ci-bad">✗ Клики не работают = переходы не настроены → добавить</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Общий стиль узнаваем — видно что это копия выбранного приложения<span class="ci-good">✓ Не обязательно идеально — важно что стиль и цвета схожи</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Написан честный самоанализ трудностей<span class="ci-good">✓ Рефлексия = понимание пробелов = правильное обучение</span></div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">🤖 AI-промпт для итога фазы Figma</div>
+<div class="ai-txt" id="p2fin">Начинающий дизайнер (13 лет) завершила фазу Figma — сделала копию 8 экранов реального приложения с прототипом. [СКРИНШОТЫ + САМОАНАЛИЗ]. Оцени готовность к следующей фазе (UX-процесс): 1) Достаточно ли она владеет Figma для работы? 2) Что нужно повторить прежде чем идти дальше? 3) Какой главный прогресс виден? Я бэкенд-разработчик без знания дизайна.</div>
+<button class="copy-btn" onclick="cp('p2fin',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+</div></div><!-- /W13-16 -->
+
+</div></div></div><!-- /TAB2 -->
+<!-- ═══════ TAB 3: UX ═══════ -->
+<div class="tab t3" id="t2">
+<div class="ph"><div class="ph-num">03</div><div class="ph-body"><h2>UX — логика, исследования и пользовательский путь</h2><p>UX — это не "как выглядит", а "как работает". Думаем о пользователе: зачем открыл, где заблудится, что расстроит.</p><div class="tags"><span class="tag">Недели 17–24</span><span class="tag">3–4 ч/нед</span><span class="tag">FigJam, Google Forms</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Ресурси — UX процес</div>
+<div class="rlist">
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">Prometheus — UX/UI Design Basic</div><div class="rc-d">Серйозний безкоштовний курс українською від Lead Experience Designer EPAM Анастасії Малинки. 12 тижнів, 4 проекти в портфоліо. Охоплює весь UX-процес: від research до тестування.<br><a class="chip" href="https://prometheus.org.ua/prometheus-plus/ux-ui-design-basic/" target="_blank">↗ prometheus.org.ua</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">UXPUB — статті про UX українською</div><div class="rc-d">Найбільша спільнота дизайнерів України. Сотні статей про user research, персони, usability testing, UX-паттерни. Є статті спеціально для початківців.<br><a class="chip" href="https://ux.pub/t/ux" target="_blank">↗ ux.pub/t/ux</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">📖</div><div><div class="rc-t">UxJournal — Основи UX (31 урок)</div><div class="rc-d">Структурований безкоштовний курс на русском: персони, user flow, прототипи, usability testing. Чітко, без води, з конкретними прикладами.<br><a class="chip" href="https://uxjournal.ru" target="_blank">↗ uxjournal.ru</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-tl">💬</div><div><div class="rc-t">Telegram: @ponchiknews</div><div class="rc-d">PonchikNews — про продуктовий дизайн і UX на русском. Глибокі розбори кейсів, психологія користувачів, стратегія. Один з найкращих дизайн-каналів в Telegram.<br><a class="chip" href="https://t.me/ponchiknews" target="_blank">↗ t.me/ponchiknews</a></div></div><span class="rbdg f">безкоштовно</span></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Домашние задания</div><div class="weeks">
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 17–18</span><span class="wk-title">User Research — интервью и Empathy Map</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-proj">🚀 исследование</span><span class="task-title">Мини-интервью с 3 людьми + персоны</span></div>
+<div class="task-body">
+<div class="task-desc">UX начинается не с Figma — а с понимания людей. Это первое настоящее UX-исследование.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Придумать идею приложения решающего реальную проблему подростков. Записать: проблема / кто будет использовать / зачем</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Провести интервью с 3 людьми (друзья, одноклассники). Вопросы: "Как сейчас решаешь [проблему]?", "Что раздражает больше всего?", "Что было бы идеально?" — записать ответы дословно</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Создать Empathy Map в FigJam: 4 квадранта — Думает / Чувствует / Говорит / Делает. Заполнить цитатами из интервью</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Создать 2 персоны на основе реальных интервью: имя, возраст, цели, боли, цитата. Не выдумывать — только из данных</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">UX-задание — проверяем не красоту, а логику. Главный вопрос: основана ли работа на реальных данных или всё выдумано?</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Есть записи ответов реальных людей<span class="ci-good">✓ "Маша, 14 лет, сказала что забывает про ДЗ потому что телефон в другой комнате"</span><span class="ci-bad">✗ Персоны выглядят как типажи без конкретики = скорее всего выдуманы</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Empathy Map содержит конкретные цитаты, не абстракции<span class="ci-good">✓ "Думает: 'опять забуду про контрольную'" — конкретно</span><span class="ci-bad">✗ "Думает: хочет учиться" — слишком общо</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Две персоны — РАЗНЫЕ люди с разными целями и болями<span class="ci-bad">✗ Если обе похожи — попросить найти контрастные типы пользователей</span></div></div>
+</div>
+<div class="ai-b"><div class="ai-lbl">🤖 AI-промпт</div>
+<div class="ai-txt" id="p3w18">Начинающий UX-дизайнер (13 лет) провела мини-исследование и создала персоны. Описание: [ВСТАВЬ ТЕКСТ]. Оцени: 1) Выглядят ли персоны как реальные люди или выдуманные стереотипы? 2) Достаточно ли конкретики в болях и целях? 3) Достаточно ли отличаются две персоны? 4) Что добавить. Я не UX-специалист.</div>
+<button class="copy-btn" onclick="cp('p3w18',this)">📋 Скопировать промпт</button>
+</div></div></div></div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 19–22</span><span class="wk-title">User Flow + бумажные и цифровые вайрфреймы</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-prac">✏️ практика</span><span class="task-title">Схема + вайрфреймы на бумаге и в Figma</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">1</div><span>В FigJam нарисовать User Flow: от открытия до главного действия. Прямоугольник = экран, ромб = решение (да/нет), стрелки = переходы. Минимум 1 разветвление</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">2</div><span>Нарисовать от руки на бумаге 6 экранов приложения (Lo-fi). Только блоки — никакого цвета. Сфотографировать</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">3</div><span>Перенести в Figma как Mid-fi: серые блоки, текст-заглушки. Показать 3 людям — понимают ли без объяснений что происходит?</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">4</div><span>Записать фидбек от 3 людей — что они не поняли</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>В User Flow есть минимум одна точка разветвления<span class="ci-good">✓ "Зарегистрирован? → Да: на главную, Нет: на регистрацию"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Бумажные вайрфреймы сфотографированы и загружены<span class="ci-good">✓ Важен сам факт работы на бумаге — это ускоряет мышление</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>3 человека дали фидбек — есть записанные наблюдения<span class="ci-good">✓ Пусть это соседи или родители — важно что реальные люди</span></div></div>
+</div></div></div>
+</div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 23–24</span><span class="wk-title">Usability Testing + итерация по фидбеку</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-proj">🚀 итог фазы</span><span class="task-title">Тест с 3 людьми → список проблем → исправления</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Сделать кликабельный прототип из Mid-fi вайрфреймов в Figma</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Провести тест с 3 людьми. Сценарий: "Представь что хочешь [действие]. Попробуй сделать это здесь." Не помогать — только смотреть и записывать где застревают</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Написать 5 найденных проблем. Для каждой: что произошло → почему (гипотеза) → как исправить</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Исправить минимум 3 проблемы в вайрфреймах — показать версию "до" и "после"</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить итог UX-фазы</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Тест проведён с реальными людьми, есть конкретные наблюдения<span class="ci-good">✓ "Катя не нашла кнопку добавить задачу — искала вверху, а она была внизу"</span><span class="ci-bad">✗ "Всем понравилось" — скорее всего тест не провёлся честно</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Список проблем структурирован: что → почему → решение<span class="ci-good">✓ Это и есть UX-мышление — не просто "плохо", а почему и как исправить</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Видна версия "до" и "после" в вайрфреймах<span class="ci-good">✓ Попроси показать что конкретно изменила</span></div></div>
+</div>
+<div class="ai-b"><div class="ai-lbl">🤖 AI-промпт для итога UX-фазы</div>
+<div class="ai-txt" id="p3fin">Начинающий UX-дизайнер (13 лет) провела юзабилити-тест и нашла проблемы. Список: [ВСТАВЬ]. Оцени: 1) Это реальные UX-проблемы или поверхностные наблюдения? 2) Логичны ли предложенные решения? 3) Готова ли переходить к визуальному Hi-fi дизайну? Я бэкенд-разработчик.</div>
+<button class="copy-btn" onclick="cp('p3fin',this)">📋 Скопировать промпт</button>
+</div></div></div></div></div>
+</div></div>
+
+</div></div></div><!-- /TAB3 -->
+
+<!-- ═══════ TAB 4: UI СИСТЕМА ═══════ -->
+<div class="tab t4" id="t3">
+<div class="ph"><div class="ph-num">04</div><div class="ph-body"><h2>UI Дизайн — визуальная система и Hi-fi макеты</h2><p>Берём вайрфреймы и делаем из них красивый Hi-fi. Строим дизайн-систему, добавляем тёмную тему, проверяем доступность.</p><div class="tags"><span class="tag">Недели 25–34</span><span class="tag">4–5 ч/нед</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Домашние задания</div><div class="weeks">
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 25–27</span><span class="wk-title">Дизайн-система — цвета, типографика, компоненты</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-proj">🚀 проект</span><span class="task-title">Страница Design System в Figma</span></div>
+<div class="task-body">
+<div class="task-desc">Дизайн-система — это как база данных для дизайна. Меняешь цвет в одном месте — обновляется везде. Это профессиональный подход к работе.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Создать страницу "🎨 Design System" в Figma-файле проекта</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Color Styles: Primary / Secondary / Neutral (3–4 серых) / Success (зелёный) / Error (красный) / Background. Минимум 8 цветов</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Text Styles: H1 (32px) / H2 (24px) / H3 (18px) / Body (16px) / Small (14px) / Caption (12px). Все с line-height 1.5</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Все компоненты (кнопка, инпут, карточка) перевести на Color Styles — не хардкодить цвета</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">5</div><span>Проверка: поменять Primary цвет → все кнопки обновились автоматически</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="ck-hint">Прямо в Figma попроси поменять Primary цвет в Color Styles. Все кнопки должны обновиться сразу. Если не обновились — компоненты не подключены к стилям.</div>
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>При смене Primary цвета — кнопки меняются везде автоматически<span class="ci-good">✓ Это главная проверка — это и есть дизайн-система</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>В правой панели Figma видны Color Styles при выделении кнопки<span class="ci-good">✓ Попроси показать скриншот — должны быть стили, не hex-цвета</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Типографическая шкала логична — H1 заметно крупнее H3, Caption мелкий<span class="ci-good">✓ Открыть страницу Design System — должен быть визуальный пример</span></div></div>
+</div></div></div></div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 28–34</span><span class="wk-title">10 Hi-fi экранов + тёмная тема + доступность</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-proj">🚀 главный проект</span><span class="task-title">Hi-fi дизайн с двумя темами</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Превратить Mid-fi в Hi-fi — применить дизайн-систему к 10 экранам. Реальные цвета, шрифты, фотографии из Unsplash, иконки из Iconify</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Проверить доступность плагином Stark: контраст текста минимум 4.5:1. Исправить проблемы</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Добавить тёмную тему через Figma Variables: создать Light и Dark мод. Переключаться одной кнопкой</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Записать Loom-видео (3–5 мин): показать все экраны, переключение тем, объяснить 3 дизайн-решения вслух</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить Hi-fi</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Дизайн выглядит цельно — все 10 экранов в одном стиле<span class="ci-good">✓ Пройтись по всем экранам — "чувствуется" ли что это одно приложение?</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Тёмная тема работает и текст читаем<span class="ci-bad">✗ Текст сливается с фоном = проблема с контрастом в тёмном моде</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Loom-видео записано и объясняет решения<span class="ci-good">✓ Может она объяснить ПОЧЕМУ выбрала этот цвет, этот шрифт?</span></div></div>
+</div>
+<div class="ai-b"><div class="ai-lbl">🤖 AI-промпт для Hi-fi</div>
+<div class="ai-txt" id="p4fin">Начинающий UI/UX дизайнер (13 лет) завершила Hi-fi дизайн. [СКРИНШОТЫ]. Оцени: 1) Консистентность — одинаков ли стиль на всех экранах? 2) Читабельность — достаточен ли контраст? 3) Навигация — понятно ли как пользоваться? 4) Главное что улучшить. Критикуй конструктивно.</div>
+<button class="copy-btn" onclick="cp('p4fin',this)">📋 Скопировать промпт</button>
+</div></div></div></div></div>
+</div></div>
+
+</div></div></div><!-- /TAB4 -->
+
+<!-- ═══════ TAB 5: AI ═══════ -->
+<div class="tab t5" id="t4">
+<div class="ph"><div class="ph-num">05</div><div class="ph-body"><h2>AI-инструменты в дизайне</h2><p>AI убирает скучную часть работы. Учимся использовать как профи: генерация UI, тексты, исследования. Цель — AI как ассистент, а не замена мышления.</p><div class="tags"><span class="tag">Недели 35–40</span><span class="tag">параллельно с проектами</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Ресурси — AI-інструменти</div>
+<div class="rlist">
+  <div class="rc"><div class="rc-ico ico-tl">🤖</div><div><div class="rc-t">Uizard.io — генерація UI з тексту</div><div class="rc-d">Описываешь приложение словами → получаешь набор экранов. Экспорт в Figma.<br><a class="chip" href="https://uizard.io" target="_blank">↗ uizard.io</a></div></div><span class="rbdg fp">фримиум</span></div>
+  <div class="rc"><div class="rc-ico ico-tl">✨</div><div><div class="rc-t">Google Stitch — генерация лендингов</div><div class="rc-d">AI от Google. Описываешь лендинг → получаешь готовый макет. Экспорт в Figma.<br><a class="chip" href="https://stitch.withgoogle.com" target="_blank">↗ stitch.withgoogle.com</a></div></div><span class="rbdg f">бесплатно</span></div>
+  <div class="rc"><div class="rc-ico ico-tl">🔥</div><div><div class="rc-t">Adobe Firefly — генерация изображений</div><div class="rc-d">Генерация фонов, иллюстраций, мокапов для дизайна. Встроен в Figma-плагины.<br><a class="chip" href="https://firefly.adobe.com" target="_blank">↗ firefly.adobe.com</a></div></div><span class="rbdg fp">фримиум</span></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">AI в дизайні — на русском</div>
+<div class="rlist">
+  <div class="rc"><div class="rc-ico ico-tl">💬</div><div><div class="rc-t">Telegram: @intelligentdesign</div><div class="rc-d">Регулярно публикует статьи и разборы про AI-инструменты в дизайне на русском — Figma AI, Midjourney для дизайнеров, автоматизации.<br><a class="chip" href="https://t.me/intelligentdesign" target="_blank">↗ t.me/intelligentdesign</a></div></div><span class="rbdg f">бесплатно</span></div>
+  <div class="rc"><div class="rc-ico ico-yt">▶</div><div><div class="rc-t">UPROCK — видео про AI в UI/UX</div><div class="rc-d">На канале есть отдельные выпуски про нейросети в работе дизайнера — как использовать Midjourney, ChatGPT, Figma AI для реальных задач.<br><a class="chip" href="https://youtube.com/@uprock" target="_blank">↗ youtube.com/@uprock → поиск "AI"</a></div></div><span class="rbdg f">бесплатно</span></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Домашние задания</div><div class="weeks">
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Недели 35–37</span><span class="wk-title">Генерация UI + критический анализ + доработка</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 AI</span><span class="task-title">AI-генерация → критика → доработка в Figma</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,245,.2);color:var(--p5)">1</div><span>В Uizard.io написать промпт описывающий своё приложение. Получить набор экранов. Скриншот результата</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,245,.2);color:var(--p5)">2</div><span>В Google Stitch сгенерировать лендинг вымышленного продукта. Экспортировать в Figma</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,245,.2);color:var(--p5)">3</div><span>Доработать Stitch-результат: заменить шрифты и цвета под свою дизайн-систему, улучшить компоненты</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,245,.2);color:var(--p5)">4</div><span>Написать анализ: что AI сделал хорошо / что плохо / что пришлось менять и почему</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Есть скриншот "до" (AI) и "после" (доработка)<span class="ci-good">✓ Разница между версиями показывает уровень её вкуса и навыков</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Анализ содержит конкретную критику AI-генерации<span class="ci-good">✓ "AI выбрал скучный серый, я заменила на фиолетовый — ЦА подростки"</span><span class="ci-bad">✗ "AI сделал хорошо, немного поменяла" — слишком поверхностно</span></div></div>
+</div>
+<div class="ai-b"><div class="ai-lbl">🤖 AI-промпт</div>
+<div class="ai-txt" id="p5ai">Начинающий дизайнер (13 лет) использовала AI-инструменты для генерации UI, затем доработала вручную. Описание изменений: [ВСТАВЬ]. Оцени: 1) Это реальные дизайн-улучшения или косметические? 2) Понимает ли разницу между AI как инструментом и AI как заменой мышления? Я бэкенд-разработчик.</div>
+<button class="copy-btn" onclick="cp('p5ai',this)">📋 Скопировать промпт</button>
+</div></div></div></div></div>
+</div></div>
+
+
+<div class="sec"><div class="sec-t">Claude как инструмент дизайнера — навыки и промпты</div>
+
+<div class="mentor-card" style="border-color:rgba(124,111,255,.2);background:rgba(124,111,255,.04)">
+<div class="mentor-t" style="color:var(--p1)">🤖 Зачем учить Claude для дизайна?</div>
+<div class="mentor-d">Claude — не просто чат. Для дизайнера это: UX-писатель, критик, исследователь, генератор идей и документатор. Умение правильно ставить задачи Claude — отдельный профессиональный навык который экономит часы работы.</div>
+<div class="tips">
+<div class="tip">⚡<span><strong>Слабый промпт:</strong> "Придумай название для кнопки" → Claude выдаст что-то дежурное</span></div>
+<div class="tip">✅<span><strong>Сильный промпт:</strong> "Мобильное приложение для подростков-студентов. Кнопка завершает задачу в трекере. Придумай 5 вариантов текста: короткие (1–2 слова), активный глагол, мотивирующие. Тон: дружелюбный, не формальный." → получишь точно то что нужно</span></div>
+</div>
+</div>
+
+<div class="weeks">
+
+<!-- CLAUDE SKILL 1 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 1</span><span class="wk-title">UX Writing — тексты интерфейса через Claude</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Написать все тексты приложения с помощью Claude</span></div>
+<div class="task-body">
+<div class="task-desc">UX Writing — тексты кнопок, заголовков, пустых состояний, ошибок, онбординга. Это профессия внутри дизайна. Claude делает 80% работы, дизайнер редактирует и адаптирует под бренд.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Задача: написать тексты для 5 типов экранов своего приложения. Использовать Claude для каждого типа</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Для онбординга: "Приложение [описание], ЦА [описание]. Напиши 3 экрана онбординга: заголовок (4–7 слов) + подзаголовок (1–2 предложения). Тон [выбрать]. Не банально."</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Для пустых состояний: "Экран без данных в приложении [описание]. Напиши заголовок + мотивирующую подпись + текст кнопки CTA. 3 варианта разного тона."</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">4</div><span>Для ошибок: "Напиши текст для 5 типов ошибок: нет интернета / неверный пароль / файл слишком большой / сервер недоступен / пустое поле. Тон дружелюбный, не технический."</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">5</div><span>Сравнить 2–3 варианта от Claude, выбрать лучший и объяснить почему</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Тексты короткие и понятны с первого прочтения<span class="ci-bad">✗ Если тексты длинные или формальные — промпт нужно уточнить</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Тексты соответствуют характеру приложения и целевой аудитории<span class="ci-good">✓ Тексты для приложения подростков должны ощущаться иначе чем для банка</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Может объяснить почему выбрала именно этот вариант из нескольких</div></div>
+</div>
+<div class="ai-b">
+<div class="ai-lbl">📋 Готовые промпты для UX Writing</div>
+<div class="ai-txt" id="cd_uxw1">Я дизайню мобильное приложение для [ОПИСАНИЕ ПРИЛОЖЕНИЯ]. Целевая аудитория: [КТО]. Тон голоса бренда: [дружелюбный / профессиональный / игривый / строгий]. Напиши UX-тексты для следующих элементов:
+— Кнопка главного действия (5 вариантов, 1–3 слова)
+— Заголовок пустого состояния (когда нет данных) + подзаголовок
+— Текст ошибки "нет подключения к интернету"
+— Подтверждение удаления (диалог): заголовок + кнопка подтвердить
+— Placeholder в поле поиска
+Каждый вариант — конкретный текст, никаких шаблонов вида "[Действие]".</div>
+<button class="copy-btn" onclick="cp('cd_uxw1',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 2 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 2</span><span class="wk-title">Генерация пользовательских персон и сценариев</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Создать персоны и User Stories через Claude</span></div>
+<div class="task-body">
+<div class="task-desc">Claude быстро создаёт основу для персон и сценариев — дальше дизайнер дополняет данными из реального исследования. Это ускоряет UX-этап в 3–4 раза.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Попросить Claude создать 2 персоны для приложения с конкретными деталями: имя, возраст, занятие, цель, боль, типичный день, цитата. Потом скорректировать по данным из реального интервью</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Попросить Claude написать 5 User Stories в формате: "Как [кто], я хочу [что], чтобы [зачем]"</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Попросить Claude написать сценарий использования (Job to be Done): "Когда [ситуация], я хочу [действие], чтобы [результат]" — 3 варианта</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">4</div><span>Сравнить с реальными интервью: что совпало? Что Claude выдумал? Исправить по реальным данным</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Промпт для генерации персон</div>
+<div class="ai-txt" id="cd_persona">Я проектирую мобильное приложение: [ОПИСАНИЕ ПРИЛОЖЕНИЯ]. Создай 2 пользовательские персоны которые будут использовать это приложение. Для каждой: имя и возраст, профессия/статус, главная цель при использовании приложения, 3 основных боли/проблемы которые приложение решает, типичная ситуация когда они открывают приложение, одна цитата которая отражает их отношение к проблеме. Персоны должны быть разными — разные мотивации, разный контекст использования.</div>
+<button class="copy-btn" onclick="cp('cd_persona',this)">📋 Скопировать промпт</button>
+</div>
+<div class="ai-b" style="margin-top:8px">
+<div class="ai-lbl">📋 Промпт для User Stories</div>
+<div class="ai-txt" id="cd_stories">Для мобильного приложения [ОПИСАНИЕ] и персоны [ИМЕНА ПЕРСОН] напиши 8 User Stories в формате: "Как [тип пользователя], я хочу [действие], чтобы [ценность/результат]". Охвати разные сценарии: первое использование, регулярное использование, нестандартные ситуации. Каждая история — конкретная, не абстрактная.</div>
+<button class="copy-btn" onclick="cp('cd_stories',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 3 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 3</span><span class="wk-title">Критика и фидбек на дизайн</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Использовать Claude как дизайн-критика</span></div>
+<div class="task-body">
+<div class="task-desc">Claude может давать профессиональный фидбек на скриншоты дизайна. Главное — задать правильную роль и конкретный фокус. Расплывчатый вопрос = расплывчатый ответ.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Научиться задавать роль: "Ты опытный UI/UX дизайнер с 10 годами опыта в мобильных продуктах. Дай критику этому экрану..."</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Научиться задавать фокус: не "оцени дизайн", а "оцени только типографическую иерархию" или "только доступность" или "только навигацию"</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Задание: загрузить скриншот своего Hi-fi и попросить Claude дать критику в 3 раундах с разным фокусом: визуал → UX → доступность</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">4</div><span>Записать топ-5 проблем и исправить минимум 3</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Промпт для UI-критики (Раунд 1 — визуал)</div>
+<div class="ai-txt" id="cd_crit1">Ты опытный UI-дизайнер мобильных приложений. Посмотри на этот экран [СКРИНШОТ]. Дай критику ТОЛЬКО визуального дизайна — не UX, не бизнес-логику. Оцени: 1) Цветовая схема — гармония, контраст, количество цветов. 2) Типографическая иерархия — ясно ли что важнее. 3) Отступы и выравнивание — одинаковые ли отступы. 4) Консистентность стиля — всё ли в одном ключе. Формат: bullet-points, конкретно и кратко. Без похвалы — только что улучшить.</div>
+<button class="copy-btn" onclick="cp('cd_crit1',this)">📋 Скопировать</button>
+</div>
+<div class="ai-b" style="margin-top:8px">
+<div class="ai-lbl">📋 Промпт для UX-критики (Раунд 2 — логика)</div>
+<div class="ai-txt" id="cd_crit2">Ты опытный UX-дизайнер. Посмотри на этот экран [СКРИНШОТ]. Дай критику ТОЛЬКО пользовательского опыта. Оцени: 1) Понятна ли задача пользователя на этом экране? 2) Логичен ли порядок элементов (читаем сверху вниз)? 3) Есть ли лишние шаги или информация? 4) Что может вызвать замешательство? 5) Где пользователь скорее всего "застрянет"? Конкретные наблюдения, не общие слова.</div>
+<button class="copy-btn" onclick="cp('cd_crit2',this)">📋 Скопировать</button>
+</div>
+<div class="ai-b" style="margin-top:8px">
+<div class="ai-lbl">📋 Промпт для проверки доступности (Раунд 3)</div>
+<div class="ai-txt" id="cd_crit3">Ты специалист по доступности (accessibility) в цифровых продуктах. Посмотри на этот экран [СКРИНШОТ]. Проверь: 1) Достаточен ли контраст текста на фоне (норма: 4.5:1 для обычного текста)? 2) Достаточный ли размер интерактивных элементов (минимум 44×44px)? 3) Понятен ли дизайн без цвета — если убрать цвет, всё ещё ясно что интерактивно? 4) Есть ли проблемы для пользователей с нарушением зрения? Конкретно и кратко.</div>
+<button class="copy-btn" onclick="cp('cd_crit3',this)">📋 Скопировать</button>
+</div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 4 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 4</span><span class="wk-title">Цвет и типографика — подбор через Claude</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Сформировать цветовую палитру и типографику через Claude</span></div>
+<div class="task-body">
+<div class="task-desc">Claude помогает обосновать дизайн-решения и предложить конкретные цвета/шрифты с hex-кодами. Это ускоряет старт любого проекта.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Для нового проекта попросить Claude предложить цветовую палитру: основной, вторичный, нейтральные, success, error. С hex-кодами и объяснением выбора</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Попросить Claude подобрать 3 пары шрифтов из Google Fonts с обоснованием для конкретного типа продукта</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Перенести результат в Figma: создать Color Styles и Text Styles на основе рекомендаций Claude</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Промпт для цветовой палитры</div>
+<div class="ai-txt" id="cd_colors">Я разрабатываю мобильное приложение: [ОПИСАНИЕ]. Целевая аудитория: [КТО]. Настроение бренда: [ключевые слова — например: дружелюбный, технологичный, спокойный]. Предложи полную цветовую палитру для UI: Primary (основной акцент), Secondary (второстепенный), Neutral-100/200/300 (светлые серые), Neutral-700/800/900 (тёмные), Success (зелёный), Error (красный), Warning (жёлтый), Background (фон). Для каждого цвета: hex-код + краткое обоснование почему именно этот. Учитывай WCAG контраст.</div>
+<button class="copy-btn" onclick="cp('cd_colors',this)">📋 Скопировать промпт</button>
+</div>
+<div class="ai-b" style="margin-top:8px">
+<div class="ai-lbl">📋 Промпт для подбора шрифтов</div>
+<div class="ai-txt" id="cd_fonts">Предложи 3 пары шрифтов с Google Fonts для мобильного приложения: [ОПИСАНИЕ]. ЦА: [КТО]. Стиль: [ключевые слова]. Для каждой пары: заголовочный шрифт + текстовый шрифт, почему они сочетаются, для какого типа продукта идеальны, конкретные настройки: размеры (H1/Body/Caption), font-weight, line-height. Пары должны заметно отличаться по характеру.</div>
+<button class="copy-btn" onclick="cp('cd_fonts',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 5 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 5</span><span class="wk-title">Анализ конкурентов — competitive review</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Разобрать конкурентов перед стартом проекта</span></div>
+<div class="task-body">
+<div class="task-desc">Любой хороший дизайнер начинает с изучения того что уже существует. Claude помогает структурировать анализ и найти незаметные паттерны.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Перед новым проектом попросить Claude назвать 5 прямых и 5 непрямых конкурентов</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Для 3 главных конкурентов сделать скриншоты ключевых экранов и загрузить в Claude с просьбой сравнить UI-паттерны</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Попросить Claude найти: что делают все одинаково (устоявшиеся паттерны) / что делает каждый по-своему / что никто не делает хорошо (возможность)</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">4</div><span>Записать выводы в Notion. Использовать при принятии дизайн-решений</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Промпт для конкурентного анализа</div>
+<div class="ai-txt" id="cd_comp">Я проектирую приложение: [ОПИСАНИЕ]. Задача: провести конкурентный анализ. 1) Назови 5 прямых конкурентов (тот же тип продукта) и 5 непрямых (решают ту же проблему иначе). 2) Для каждого из топ-3 опиши: ключевые UI-паттерны которые они используют, главные UX-решения на основных экранах, визуальный стиль и ЦА. 3) Что делают все конкуренты одинаково — это стало стандартом? 4) Где есть возможность сделать лучше? Структурировано, конкретно.</div>
+<button class="copy-btn" onclick="cp('cd_comp',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 6 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 6</span><span class="wk-title">Написание дизайн-документации и спецификаций</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Документировать дизайн-решения через Claude</span></div>
+<div class="task-body">
+<div class="task-desc">Профессиональный дизайнер документирует свои решения. Claude превращает черновые заметки в структурированные спецификации, README для Figma-файлов и описания компонентов.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>После завершения дизайна попросить Claude написать README для Figma-файла: что за проект, структура файла, как работать с компонентами</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Попросить Claude превратить черновые заметки о дизайн-решениях в связный текст для кейса</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Написать описание компонентов дизайн-системы: что делает каждый компонент, когда использовать, варианты и состояния</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Промпт для написания кейса</div>
+<div class="ai-txt" id="cd_case">Помоги написать кейс для портфолио на Behance. Вот черновые заметки о проекте: [ВСТАВЬ СВОИ ЗАМЕТКИ — проблема, что делала, решение, результат]. Напиши структурированный кейс: 1) Контекст и проблема (3–4 предложения). 2) Исследование — что узнала о пользователях. 3) Процесс — ключевые дизайн-решения и почему. 4) Результат — финальный дизайн и что изменилось. Тон: профессиональный но живой, от первого лица. Длина: ~300–400 слов. Не начинай с "Я дизайнер".</div>
+<button class="copy-btn" onclick="cp('cd_case',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 7 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 7</span><span class="wk-title">Подготовка к собеседованию — симуляция с Claude</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 Claude</span><span class="task-title">Провести мок-интервью и подготовить ответы</span></div>
+<div class="task-body">
+<div class="task-desc">Claude может симулировать собеседование на позицию Junior UI/UX Designer и дать честный фидбек на ответы. Лучшая подготовка — практика, а не чтение статей.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">1</div><span>Попросить Claude задать 10 типичных вопросов на собеседовании Junior UX Designer. Ответить на каждый письменно</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">2</div><span>Попросить Claude оценить ответы: что сильно / что слабо / как улучшить</span></div>
+<div class="step"><div class="sn" style="background:rgba(124,111,255,.2);color:var(--p1)">3</div><span>Попросить Claude дать дизайн-задание (как на реальном интервью) с дедлайном 1 час и оценить результат</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Промпт для мок-интервью</div>
+<div class="ai-txt" id="cd_interview">Проведи мок-собеседование на позицию Junior UI/UX Designer. Я буду отвечать, ты задаёшь вопросы по одному и оцениваешь каждый ответ. Начни с 10 типичных вопросов: смесь теоретических (что такое UX, расскажи о дизайн-процессе), ситуационных (как ты решала [проблему]) и про портфолио. После каждого моего ответа: коротко оцени что хорошо и что добавить. После всех 10 — общий фидбек. Будь честным критиком, не хвали просто так.</div>
+<button class="copy-btn" onclick="cp('cd_interview',this)">📋 Скопировать промпт</button>
+</div>
+<div class="ai-b" style="margin-top:8px">
+<div class="ai-lbl">📋 Промпт для дизайн-задания</div>
+<div class="ai-txt" id="cd_task">Дай мне дизайн-задание как на реальном техническом интервью на Junior UX Designer. Задание должно быть реалистичным: конкретная проблема, конкретный продукт, конкретный дедлайн (1 час). Я опишу своё решение текстом и покажу скетч или Figma. После — оцени решение как нанимающий менеджер: логика процесса, качество решений, умение обосновывать выборы.</div>
+<button class="copy-btn" onclick="cp('cd_task',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<!-- CLAUDE SKILL 8 -->
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Навык 8</span><span class="wk-title">Правила хороших промптов для дизайнера</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg bck">📐 шпаргалка</span><span class="task-title">Формула сильного промпта для дизайн-задач</span></div>
+<div class="task-body">
+<div class="task-desc">Плохой промпт = общий ответ. Хороший промпт = конкретный полезный результат. Выучить эту формулу и применять каждый раз.</div>
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">①</div><span><strong>Роль:</strong> "Ты опытный UI/UX дизайнер..." или "Ты UX-писатель с опытом в финтехе..." — задать экспертизу</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">②</div><span><strong>Контекст:</strong> описание приложения + ЦА + тон голоса + платформа (iOS/Android/Web)</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">③</div><span><strong>Задача:</strong> конкретно что нужно сделать — не "помоги", а "напиши / оцени / предложи / сравни"</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">④</div><span><strong>Ограничения:</strong> длина, количество вариантов, формат ответа, что нельзя делать</span></div>
+<div class="step"><div class="sn" style="background:rgba(47,255,180,.2);color:var(--p3)">⑤</div><span><strong>Пример или антипример:</strong> "Вот хороший пример: [X]" или "Не делай как: [Y]"</span></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">📋 Шаблон промпта — заполнить под свой проект</div>
+<div class="ai-txt" id="cd_template">Ты [РОЛЬ — например: опытный UX-писатель для мобильных приложений].
+
+Контекст: мобильное приложение [ЧТО ДЕЛАЕТ]. Целевая аудитория: [КТО]. Тон: [дружелюбный / строгий / игривый / нейтральный]. Платформа: [iOS / Android / оба].
+
+Задача: [КОНКРЕТНО ЧТО НУЖНО].
+
+Ограничения: [ДЛИНА / КОЛИЧЕСТВО / ФОРМАТ]. 
+
+Пример хорошего результата: [ВСТАВЬ ПРИМЕР ИЛИ УДАЛИ ЭТУ СТРОКУ].
+
+Что не нужно: [УДАЛИ ИЛИ ЗАПОЛНИ].</div>
+<button class="copy-btn" onclick="cp('cd_template',this)">📋 Скопировать шаблон</button>
+</div>
+</div></div>
+</div></div>
+
+</div></div></div><!-- /TAB5 -->
+
+<!-- ═══════ TAB 6: ПОРТФОЛИО ═══════ -->
+<div class="tab t6" id="t5">
+<div class="ph"><div class="ph-num">06</div><div class="ph-body"><h2>Портфолио — 3 кейса и выход в мир</h2><p>Хороший кейс = проблема + процесс + решение + результат. Не просто скриншоты.</p><div class="tags"><span class="tag">Недели 41–48+</span><span class="tag">Behance, Framer</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Ресурси — портфоліо</div><div class="rlist">
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">UXPUB — як оформити кейс і портфоліо</div><div class="rc-d">На ux.pub є статті про структуру кейсів, що дивляться рекрутери, приклади сильних портфоліо від українських дизайнерів. Шукати "портфоліо" і "кейс".<br><a class="chip" href="https://ux.pub" target="_blank">↗ ux.pub → пошук "портфоліо"</a></div></div><span class="rbdg f">безкоштовно</span></div>
+  <div class="rc"><div class="rc-ico ico-bk">🇺🇦</div><div><div class="rc-t">DOU.ua — матеріали для дизайнерів</div><div class="rc-d">DOU — головний IT-ресурс України. Є статті про кар'єру UX/UI дизайнера, зарплати, як влаштуватись на роботу та що вимагають роботодавці.<br><a class="chip" href="https://dou.ua/lenta/tags/UX+UI/" target="_blank">↗ dou.ua → UX/UI</a></div></div><span class="rbdg f">безкоштовно</span></div>
+</div></div>
+<div class="sec"><div class="sec-t">Домашние задания</div><div class="weeks">
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Кейс 1</span><span class="wk-title">Оформить мобильное приложение в Behance</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-proj">🚀 публикация</span><span class="task-title">Написать и опубликовать кейс</span></div>
+<div class="task-body">
+<div class="steps">
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">1</div><span>Структура кейса: Проблема (2–3 предл.) → Исследование (Empathy Map + персоны) → Процесс (вайрфреймы → Hi-fi) → Результат (финальные скриншоты + ссылка на прототип)</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">2</div><span>Написать тексты с помощью Claude/ChatGPT: "Помоги написать описание для дизайн-кейса: [описание проекта]. Тон профессиональный но живой, 3 абзаца."</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">3</div><span>Опубликовать на Behance.net с заголовком, тегами и обложкой</span></div>
+<div class="step"><div class="sn" style="background:rgba(255,107,107,.2);color:var(--p2)">4</div><span>Создать личный сайт-портфолио на Framer.com: добавить имя, описание, ссылки на 3 кейса</span></div>
+</div>
+<div class="ck"><div class="ck-h" onclick="tc(this)"><span>✅</span><span class="ck-lbl">Как проверить кейс</span><span class="ck-arr">▼</span></div>
+<div class="ck-body">
+<div class="cl">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Кейс опубликован и доступен по ссылке в режиме инкогнито<span class="ci-good">✓ Открой ссылку в инкогнито — виден ли кейс без входа в аккаунт?</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>В кейсе есть текст объясняющий процесс — не только картинки<span class="ci-good">✓ Рекрутеры читают текст — он должен объяснять зачем и почему</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Структура логична: проблема → решение → результат<span class="ci-bad">✗ Кейс начинается со скриншотов без контекста = переработать структуру</span></div></div>
+</div>
+<div class="ai-b"><div class="ai-lbl">🤖 AI-промпт для кейса</div>
+<div class="ai-txt" id="p6case">Начинающий UI/UX дизайнер (13 лет) написала первый кейс для портфолио. Текст: [ВСТАВЬ]. Оцени: 1) Понятна ли проблема которую решает приложение? 2) Виден ли процесс — или только результат? 3) Убедит ли этот кейс джуниор-работодателя что автор умеет думать как дизайнер? 4) Что улучшить в тексте. Я не HR и не дизайнер.</div>
+<button class="copy-btn" onclick="cp('p6case',this)">📋 Скопировать промпт</button>
+</div></div></div></div></div>
+</div></div>
+
+</div></div></div><!-- /TAB6 -->
+<!-- ═══════ TAB 7: ИНСТРУМЕНТЫ ═══════ -->
+<div class="tab t7" id="t6">
+<div class="ph"><div class="ph-num">🛠</div><div class="ph-body"><h2>Полный стек инструментов UI/UX дизайнера</h2><p>Профессиональный дизайнер — это не только Figma. Знание этого стека сразу отличает джуна от мидла.</p><div class="tags"><span class="tag">осваивать постепенно</span><span class="tag">параллельно с учёбой</span></div></div></div>
+
+<div class="sec"><div class="sec-t">Приоритет</div>
+<div class="legend">
+  <div class="leg-i"><span class="pri must">must</span> без этого не устроиться</div>
+  <div class="leg-i"><span class="pri imp">important</span> спросят на собеседовании</div>
+  <div class="leg-i"><span class="pri bon">bonus</span> выделит среди кандидатов</div>
+</div>
+<div class="matrix">
+  <div class="mc"><div class="mc-t" style="color:var(--p2)">Первые 3 месяца</div>
+    <div class="mi">● Figma основы</div><div class="mi">● FigJam схемы</div><div class="mi">● Notion заметки</div><div class="mi">● Google Drive</div><div class="mi">● Pinterest мудборды</div><div class="mi">● Dribbble / Mobbin</div>
+  </div>
+  <div class="mc"><div class="mc-t" style="color:var(--p4)">Месяцы 4–7</div>
+    <div class="mi">● Figma компоненты</div><div class="mi">● Figma Dev Mode</div><div class="mi">● Loom видео-фидбек</div><div class="mi">● Maze тестирование</div><div class="mi">● Slack коммуникация</div><div class="mi">● Google Forms опросы</div>
+  </div>
+  <div class="mc"><div class="mc-t" style="color:var(--p3)">Месяцы 8–12+</div>
+    <div class="mi">● Framer живые сайты</div><div class="mi">● ProtoPie анимации</div><div class="mi">● Jira / Linear задачи</div><div class="mi">● Hotjar аналитика</div><div class="mi">● HTML/CSS основы</div><div class="mi">● Pitch презентации</div>
+  </div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Дизайн и прототипирование</div><div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(124,111,255,.12)">🎨</div><div><span class="ti2-name">Figma</span><span class="ti2-cat">основной инструмент</span></div><span class="pri must">must</span></div><div class="ti2-d">90% вакансий. Дизайн, прототипы, компоненты, дизайн-системы, совместная работа.</div><div class="ti2-w">Использовать с первого дня</div><a class="tl" href="https://figma.com" target="_blank">↗ figma.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">🗂️</div><div><span class="ti2-name">FigJam</span><span class="ti2-cat">вайтборд / схемы</span></div><span class="pri must">must</span></div><div class="ti2-d">User flow, sitemap, empathy map, мозговые штурмы. Встроен в Figma.</div><div class="ti2-w">UX-этап, планирование</div><a class="tl" href="https://figma.com/figjam" target="_blank">↗ figma.com/figjam</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,179,71,.12)">⚡</div><div><span class="ti2-name">ProtoPie</span><span class="ti2-cat">сложные анимации</span></div><span class="pri imp">important</span></div><div class="ti2-d">Когда Figma не хватает: микроанимации, жесты, реакции на скролл. Портфолио впечатляет.</div><div class="ti2-w">Сложные анимации (месяцы 8–10+)</div><a class="tl" href="https://protopie.io" target="_blank">↗ protopie.io</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(200,255,71,.12)">🌐</div><div><span class="ti2-name">Framer</span><span class="ti2-cat">живые сайты из дизайна</span></div><span class="pri imp">important</span></div><div class="ti2-d">Превращает дизайн в настоящий сайт. Идеал для сайта-портфолио.</div><div class="ti2-w">Личный портфолио-сайт</div><a class="tl" href="https://framer.com" target="_blank">↗ framer.com</a></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Организация работы</div><div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,255,255,.05)">📋</div><div><span class="ti2-name">Notion</span><span class="ti2-cat">база знаний / проекты</span></div><span class="pri must">must</span></div><div class="ti2-d">Заметки, трекер задач, документация, написание кейсов. Встраивать Figma-ссылки прямо в документы.</div><div class="ti2-w">С первого дня — вести конспекты и задачи</div><a class="tl" href="https://notion.so" target="_blank">↗ notion.so</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,107,107,.12)">🎯</div><div><span class="ti2-name">Jira</span><span class="ti2-cat">задачи в IT-командах</span></div><span class="pri imp">important</span></div><div class="ti2-d">Стандарт в IT. Дизайнер работает с тикетами — берёт задачу, переводит в In Progress, Done. Нужно ориентироваться в Scrum/Kanban доске.</div><div class="ti2-w">В командной работе</div><a class="tl" href="https://atlassian.com/software/jira" target="_blank">↗ atlassian.com/jira</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(124,111,255,.12)">💬</div><div><span class="ti2-name">Slack</span><span class="ti2-cat">мессенджер команды</span></div><span class="pri must">must</span></div><div class="ti2-d">Стандарт корпоративного общения в IT. Нужно уметь грамотно описывать дизайн-решения текстом — это отдельный навык.</div><div class="ti2-w">Ежедневное общение в команде</div><a class="tl" href="https://slack.com" target="_blank">↗ slack.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">🎥</div><div><span class="ti2-name">Loom</span><span class="ti2-cat">видео-объяснения</span></div><span class="pri imp">important</span></div><div class="ti2-d">Запись экрана + лицо. Вместо 10 минут текста — 2-минутное видео с демонстрацией макета.</div><div class="ti2-w">Презентация дизайна асинхронно</div><a class="tl" href="https://loom.com" target="_blank">↗ loom.com</a></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">UX Research и тестирование</div><div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,107,107,.12)">🧪</div><div><span class="ti2-name">Maze</span><span class="ti2-cat">usability testing</span></div><span class="pri imp">important</span></div><div class="ti2-d">Интеграция с Figma. Отправляешь прототип → пользователи кликают → видишь heatmaps и где застревали.</div><div class="ti2-w">Проверка прототипа без живой встречи</div><a class="tl" href="https://maze.co" target="_blank">↗ maze.co</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,179,71,.12)">🔥</div><div><span class="ti2-name">Hotjar</span><span class="ti2-cat">аналитика поведения</span></div><span class="pri imp">important</span></div><div class="ti2-d">Тепловые карты кликов и скроллинга на реальных сайтах. Видео-записи сессий реальных пользователей.</div><div class="ti2-w">Анализ реального продукта в продакшне</div><a class="tl" href="https://hotjar.com" target="_blank">↗ hotjar.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">📋</div><div><span class="ti2-name">Google Forms</span><span class="ti2-cat">опросы и анкеты</span></div><span class="pri must">must</span></div><div class="ti2-d">Базовый инструмент для UX-опросов. Нужно уметь составлять правильные вопросы без leading questions.</div><div class="ti2-w">User research, скрининг респондентов</div><a class="tl" href="https://forms.google.com" target="_blank">↗ forms.google.com</a></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Ресурсы и ассеты</div><div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">🖼️</div><div><span class="ti2-name">Unsplash / Pexels</span><span class="ti2-cat">бесплатные фотографии</span></div><span class="pri must">must</span></div><div class="ti2-d">Плагин Unsplash в Figma — вставка реалистичных фото одним кликом.</div><a class="tl" href="https://unsplash.com" target="_blank">↗ unsplash.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(124,111,255,.12)">✨</div><div><span class="ti2-name">Iconify</span><span class="ti2-cat">иконки — плагин Figma</span></div><span class="pri must">must</span></div><div class="ti2-d">200 000+ иконок из 100+ наборов прямо в Figma. Никогда не рисовать иконки вручную.</div><a class="tl" href="https://iconify.design" target="_blank">↗ iconify.design</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,107,107,.12)">🎨</div><div><span class="ti2-name">undraw.co</span><span class="ti2-cat">бесплатные иллюстрации</span></div><span class="pri imp">important</span></div><div class="ti2-d">Векторные иллюстрации с изменяемым цветом. Онбординг, пустые состояния, лендинги.</div><a class="tl" href="https://undraw.co" target="_blank">↗ undraw.co</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,179,71,.12)">🎯</div><div><span class="ti2-name">Coolors.co</span><span class="ti2-cat">цветовые палитры</span></div><span class="pri must">must</span></div><div class="ti2-d">Генератор палитр, проверка контраста, экспорт в CSS. Начало каждого проекта.</div><a class="tl" href="https://coolors.co" target="_blank">↗ coolors.co</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">📱</div><div><span class="ti2-name">Mobbin</span><span class="ti2-cat">референсы мобильных UI</span></div><span class="pri must">must</span></div><div class="ti2-d">База скриншотов реальных приложений с фильтрами по паттернам. Смотреть перед каждым новым экраном.</div><a class="tl" href="https://mobbin.com" target="_blank">↗ mobbin.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(200,255,71,.12)">🔤</div><div><span class="ti2-name">Google Fonts</span><span class="ti2-cat">шрифты</span></div><span class="pri must">must</span></div><div class="ti2-d">1500+ бесплатных шрифтов. Прямая интеграция с Figma. Топ для UI: Inter, DM Sans, Plus Jakarta Sans.</div><a class="tl" href="https://fonts.google.com" target="_blank">↗ fonts.google.com</a></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Handoff разработчикам</div><div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(124,111,255,.12)">👩‍💻</div><div><span class="ti2-name">Figma Dev Mode</span><span class="ti2-cat">инспект для разработчиков</span></div><span class="pri must">must</span></div><div class="ti2-d">Режим для разработчиков: отступы, размеры, CSS, экспорт ассетов. Уметь правильно подготовить файл.</div><a class="tl" href="https://figma.com/dev-mode" target="_blank">↗ figma.com/dev-mode</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">🔤</div><div><span class="ti2-name">HTML/CSS базово</span><span class="ti2-cat">понимание кода</span></div><span class="pri imp">important</span></div><div class="ti2-d">Дизайнер не программирует, но знать box model, padding/margin, что реализуемо — критически важно.</div><a class="tl" href="https://freecodecamp.org" target="_blank">↗ freecodecamp.org</a></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">Насмотренность и вдохновение</div><div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,107,107,.12)">🏀</div><div><span class="ti2-name">Dribbble</span><span class="ti2-cat">вдохновение</span></div><span class="pri must">must</span></div><div class="ti2-d">Главная платформа для дизайн-вдохновения. Просматривать ежедневно 5–10 минут + публиковать свои работы.</div><a class="tl" href="https://dribbble.com" target="_blank">↗ dribbble.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(124,111,255,.12)">🌟</div><div><span class="ti2-name">Awwwards</span><span class="ti2-cat">лучший веб-дизайн</span></div><span class="pri imp">important</span></div><div class="ti2-d">Лауреаты премии за лучший веб-дизайн. Высокая планка — смотреть для понимания возможного.</div><a class="tl" href="https://awwwards.com" target="_blank">↗ awwwards.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(200,255,71,.12)">📌</div><div><span class="ti2-name">Pinterest</span><span class="ti2-cat">мудборды</span></div><span class="pri must">must</span></div><div class="ti2-d">Лучший инструмент для мудбордов. Создавать отдельные доски: цвет / типографика / UI / веб.</div><a class="tl" href="https://pinterest.com" target="_blank">↗ pinterest.com</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,107,245,.12)">🖼️</div><div><span class="ti2-name">Behance</span><span class="ti2-cat">портфолио и кейсы</span></div><span class="pri must">must</span></div><div class="ti2-d">Главная платформа для дизайн-портфолио. Смотреть как оформляют кейсы + публиковать свои.</div><a class="tl" href="https://behance.net" target="_blank">↗ behance.net</a></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">🇺🇦 Насмотреність — україномовні та русскоязичні джерела</div>
+<div class="tool-grid">
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(124,111,255,.12)">🇺🇦</div><div><span class="ti2-name">UXPUB — спільнота дизайнерів</span><span class="ti2-cat">найбільша UA дизайн-спільнота</span></div><span class="pri must">must</span></div><div class="ti2-d">ux.pub — сотні статей, кейсів, добірок ресурсів, книг і порад від практикуючих українських дизайнерів. Є окремий розділ "Натхнення" з добірками для насмотреності.</div><div class="ti2-w">Читати щодня по 1 статті + підписатись на Telegram</div><a class="tl" href="https://ux.pub" target="_blank">↗ ux.pub</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(47,255,180,.12)">🇺🇦</div><div><span class="ti2-name">DOU.ua — дизайн в IT</span><span class="ti2-cat">кар'єра і практика</span></div><span class="pri imp">important</span></div><div class="ti2-d">Головний IT-ресурс України. Статті про кар'єру дизайнера, зарплати, інтерв'ю з практикуючими спеціалістами. Розуміти ринок — частина навчання.</div><div class="ti2-w">Читати раз на тиждень — статті про UX/UI кар'єру</div><a class="tl" href="https://dou.ua/lenta/tags/UX+UI/" target="_blank">↗ dou.ua → UX/UI</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(255,179,71,.12)">💬</div><div><span class="ti2-name">Telegram: @ponchiknews</span><span class="ti2-cat">продуктовий дизайн і UX</span></div><span class="pri must">must</span></div><div class="ti2-d">Один з найкращих дизайн-каналів в Telegram на русском. Глибокі розбори кейсів, психологія користувачів, UX стратегія — без поверхневих порад.</div><div class="ti2-w">Підписатись і читати вранці</div><a class="tl" href="https://t.me/ponchiknews" target="_blank">↗ t.me/ponchiknews</a></div>
+  <div class="ti2"><div class="ti2-h"><div class="ti2-ico" style="background:rgba(200,255,71,.12)">💬</div><div><span class="ti2-name">Telegram: @ux_brunch</span><span class="ti2-cat">добірки UI/UX проектів</span></div><span class="pri imp">important</span></div><div class="ti2-d">Регулярні добірки цікавих UI/UX проектів і статей на русском. Хороший щоденний дайджест для насмотреності.</div><div class="ti2-w">Щоденна насмотреність і контекст індустрії</div><a class="tl" href="https://t.me/ux_brunch" target="_blank">↗ t.me/ux_brunch</a></div>
+</div></div>
+
+</div><!-- /TAB7 -->
+<!-- ═══════ TAB 8: ГИД МЕНТОРА ═══════ -->
+<div class="tab t8" id="t7">
+<div class="ph"><div class="ph-num">👨‍💻</div><div class="ph-body"><h2>Гид ментора — как проверять без знания дизайна</h2><p>Ты бэкендер и не знаешь дизайна — и это нормально. Здесь всё что нужно: принципы, универсальные вопросы и готовые промпты.</p><div class="tags"><span class="tag">для тебя</span><span class="tag">читать один раз</span></div></div></div>
+
+<div class="mentor-card">
+<div class="mentor-t">🧠 Главный принцип</div>
+<div class="mentor-d">Ты не можешь оценить "красиво или нет" — это субъективно. Но ты можешь оценить <strong>логику, структуру и процесс</strong>. Задавай вопрос "почему" — и сразу поймёшь понимает ли она что делает.</div>
+<div class="tips">
+<div class="tip">✅<span>"Почему ты выбрала этот цвет для кнопки?" — правильный ответ содержит причину, не просто "нравится"</span></div>
+<div class="tip">✅<span>"Что произойдёт если я нажму здесь?" — проверяет логику прототипа</span></div>
+<div class="tip">✅<span>"Кто будет пользоваться этим и зачем?" — проверяет UX-мышление</span></div>
+<div class="tip">❌<span>"Мне не нравится дизайн" без конкретики — это не помогает учиться</span></div>
+<div class="tip">❌<span>"Красиво!" без объяснения что именно — даёт ложную уверенность</span></div>
+</div></div>
+
+<div class="sec"><div class="sec-t">5 универсальных вопросов для любой работы</div>
+<div class="weeks">
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Вопрос 1</span><span class="wk-title">Понятно ли что это и как пользоваться?</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg bck">🔍 тест</span><span class="task-title">Тест первого впечатления — 5 секунд</span></div>
+<div class="task-body">
+<div class="task-desc">Попроси кого-нибудь (соседа, родителя) посмотреть на экран 5 секунд и ответить: что это? что нужно сделать? Если понял без объяснений — дизайн работает.</div>
+<div class="cl" style="margin-top:10px">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Случайный человек понял назначение экрана за 5 секунд</div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Основное действие видно сразу — не нужно его искать<span class="ci-good">✓ Кнопка главного действия самая заметная на экране</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Нет элементов вызывающих вопрос "что это такое?"</div></div>
+</div>
+</div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Вопрос 2</span><span class="wk-title">Есть ли иерархия — что важнее всего?</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg bck">🔍 тест</span><span class="task-title">Тест визуальной иерархии</span></div>
+<div class="task-body">
+<div class="task-desc">Посмотри на экран и запиши — на что первым делом падает взгляд? Потом второй? Третий? Порядок должен совпадать с логикой задачи пользователя.</div>
+<div class="cl" style="margin-top:10px">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Разные элементы имеют заметно разный размер — не всё одного размера<span class="ci-bad">✗ Если всё одинаково — нет иерархии</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Кнопка основного действия самая заметная<span class="ci-good">✓ Должна выделяться цветом или размером</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Второстепенный текст мельче/светлее основного</div></div>
+</div>
+<div class="ai-b" style="margin-top:10px">
+<div class="ai-lbl">🤖 Универсальный промпт для любого экрана</div>
+<div class="ai-txt" id="muniv">Посмотри на этот экран мобильного приложения [СКРИНШОТ]. Я бэкенд-разработчик без знания дизайна, проверяю работу ученика (13 лет). Оцени: 1) Что первым бросается в глаза — это правильно? 2) Понятно ли без объяснений что делает этот экран? 3) Есть ли визуальная иерархия — одни элементы явно важнее? 4) Главные 2–3 проблемы что стоит исправить. Говори просто, без терминов.</div>
+<button class="copy-btn" onclick="cp('muniv',this)">📋 Скопировать промпт</button>
+</div>
+</div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Вопрос 3</span><span class="wk-title">Консистентно ли — похожи ли все экраны?</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg bck">🔍 тест</span><span class="task-title">Смотри как на код — как на переменные</span></div>
+<div class="task-body">
+<div class="task-desc">Пройдись по всем экранам проекта. Как программист: кнопки должны выглядеть одинаково везде, отступы должны повторяться. Любое отклонение = баг.</div>
+<div class="cl" style="margin-top:10px">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Кнопки одного типа (например "Сохранить") выглядят одинаково на всех экранах</div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Шрифт заголовков одинаковый везде<span class="ci-bad">✗ Разные шрифты на разных экранах = нет дизайн-системы</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Нет экрана который выглядит "из другого приложения"</div></div>
+</div>
+</div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Вопрос 4</span><span class="wk-title">Есть ли процесс или только результат?</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg bck">🔍 тест</span><span class="task-title">Проверка UX-мышления через "почему"</span></div>
+<div class="task-body">
+<div class="task-desc">Попроси объяснить любое решение. Дизайнер с мышлением отвечает причиной. Без мышления говорит "так красивее" или "не знаю, так сделала".</div>
+<div class="cl" style="margin-top:10px">
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>На вопрос "почему кнопка здесь?" есть обоснование<span class="ci-good">✓ "Кнопка снизу — большинство приложений ставят главное действие в зоне большого пальца"</span></div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Может объяснить кто пользователь и зачем ему это приложение</div></div>
+<div class="ci"><div class="cb" onclick="ck(this)"></div><div>Есть следы процесса: вайрфреймы, исследование, несколько итераций<span class="ci-good">✓ Процесс важнее красоты финального результата</span></div></div>
+</div>
+</div></div>
+</div></div>
+
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Вопрос 5</span><span class="wk-title">Прогресс — лучше ли чем месяц назад?</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg bck">🔍 трекинг</span><span class="task-title">Сравнение работ во времени</span></div>
+<div class="task-body">
+<div class="task-desc">Сравнивай работы между собой во времени. Даже если работа "плохая" по объективным меркам — важно что она лучше предыдущей. Отмечай прогресс вслух.</div>
+<div class="tips" style="margin-top:10px">
+<div class="tip">💡<span>Сохраняй скриншоты каждой работы. Раз в месяц показывай "вот неделя 1, вот неделя 4" — прогресс мотивирует</span></div>
+<div class="tip">💡<span>Хвали конкретно: не "молодец", а "кнопки теперь одинаковые везде — это хорошее улучшение"</span></div>
+<div class="tip">💡<span>Критикуй конкретно: не "некрасиво", а "три разных размера кнопок — сделай их одинаковыми"</span></div>
+</div>
+</div></div>
+</div></div>
+
+</div></div>
+
+<div class="sec"><div class="sec-t">Готовые AI-промпты для разных ситуаций</div>
+<div class="weeks">
+<div class="wk"><div class="wk-h" onclick="tw(this)"><span class="wk-label">Промпты</span><span class="wk-title">Скопировать → вставить в Claude или ChatGPT</span><span class="wk-arr">▼</span></div>
+<div class="wk-body">
+<div class="task"><div class="task-h"><span class="bdg b-ai">🤖 AI</span><span class="task-title">Оценить конкретную работу со скриншотом</span></div>
+<div class="task-body"><div class="ai-b" style="margin-top:0">
+<div class="ai-txt" id="m1">Я ментор начинающего UI/UX дизайнера (13 лет). Сам я бэкенд-разработчик без знания дизайна. Посмотри на эту работу [ПРИКРЕПИ СКРИНШОТ] и дай мне фидбек который я смогу передать ученику. Структура: 1) Что сделано хорошо — 2–3 конкретных плюса. 2) Что улучшить — 2–3 конкретных минуса с объяснением. 3) Одно главное задание на следующую неделю. Говори просто, без дизайн-жаргона.</div>
+<button class="copy-btn" onclick="cp('m1',this)">📋 Скопировать</button>
+</div></div></div>
+<div class="task" style="margin-top:10px"><div class="task-h"><span class="bdg b-ai">🤖 AI</span><span class="task-title">Проверить конспект по теме</span></div>
+<div class="task-body"><div class="ai-b" style="margin-top:0">
+<div class="ai-txt" id="m2">Начинающий дизайнер (13 лет) объяснила тему [НАЗВАНИЕ ТЕМЫ] своими словами. Вот её объяснение: [ВСТАВЬ ТЕКСТ]. Скажи: 1) Правильно ли поняла суть? 2) Что упустила или поняла неверно? 3) Как объяснить непонятное — очень просто. Я бэкенд-разработчик проверяю домашку по дизайну.</div>
+<button class="copy-btn" onclick="cp('m2',this)">📋 Скопировать</button>
+</div></div></div>
+<div class="task" style="margin-top:10px"><div class="task-h"><span class="bdg b-ai">🤖 AI</span><span class="task-title">Готова ли переходить к следующей фазе?</span></div>
+<div class="task-body"><div class="ai-b" style="margin-top:0">
+<div class="ai-txt" id="m3">Начинающий дизайнер (13 лет) завершила фазу [НАЗВАНИЕ]. Вот что она сделала: [ОПИШИ РАБОТЫ]. Скажи: 1) Готова ли к следующей фазе или нужно повторить? 2) Если есть пробелы — какие конкретно? 3) На что обратить внимание в следующей фазе. Я бэкенд-разработчик, ментор без знания дизайна.</div>
+<button class="copy-btn" onclick="cp('m3',this)">📋 Скопировать</button>
+</div></div></div>
+<div class="task" style="margin-top:10px"><div class="task-h"><span class="bdg b-ai">🤖 AI</span><span class="task-title">Придумать дополнительное задание</span></div>
+<div class="task-body"><div class="ai-b" style="margin-top:0">
+<div class="ai-txt" id="m4">Начинающий UI/UX дизайнер (13 лет) хорошо справилась с заданием по [ТЕМА] и хочет ещё практики. Придумай 2–3 дополнительных задания: с конкретными шагами, бесплатными инструментами, результатом который можно проверить визуально. Уровень: полный новичок без опыта.</div>
+<button class="copy-btn" onclick="cp('m4',this)">📋 Скопировать</button>
+</div></div></div>
+</div></div>
+</div></div>
+
+<div class="mentor-card" style="margin-top:20px">
+<div class="mentor-t">⏱ Сколько времени нужно на проверку</div>
+<div class="tips">
+<div class="tip">📅<span><strong>Раз в неделю ~15 мин:</strong> посмотреть работу, задать 3–4 вопроса, скопировать AI-промпт и передать фидбек</span></div>
+<div class="tip">📅<span><strong>Раз в месяц ~30 мин:</strong> review прогресса — сравнить с работами прошлого месяца, скорректировать план</span></div>
+<div class="tip">📅<span><strong>По завершению фазы ~45 мин:</strong> финальная проверка всех работ, решение идти ли дальше</span></div>
+<div class="tip">💡<span>Если нет времени — попроси её саму пройтись по чеклисту перед показом. Самопроверка развивает критическое мышление</span></div>
+</div>
+</div>
+
+</div><!-- /TAB8 -->
+
+</div><!-- /main -->
+
+<script>
+const colors=['var(--p1)','var(--p3)','var(--p4)','var(--p2)','var(--p5)','var(--p6)','var(--p7)','var(--pm)'];
+function st(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  document.querySelectorAll('.nav-i').forEach((n,j)=>{
+    n.classList.toggle('on',j===i);
+    n.style.borderBottomColor=j===i?colors[j]:'transparent';
+    n.style.color=j===i?'var(--tx)':'';
+  });
+  window.scrollTo(0,0);
+}
+function tw(h){
+  const b=h.nextElementSibling,a=h.querySelector('.wk-arr'),o=b.classList.contains('open');
+  b.classList.toggle('open',!o);a.classList.toggle('open',!o);
+}
+function tc(h){
+  const b=h.nextElementSibling,a=h.querySelector('.ck-arr'),o=b.classList.contains('open');
+  b.classList.toggle('open',!o);a.classList.toggle('open',!o);
+}
+function ck(box){
+  box.classList.toggle('on');
+  box.textContent=box.classList.contains('on')?'✓':'';
+}
+function cp(id,btn){
+  const txt=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='✓ Скопировано';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent='📋 Скопировать';btn.classList.remove('done')},2000);
+  }).catch(()=>{
+    const ta=document.createElement('textarea');ta.value=txt;
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    btn.textContent='✓ Скопировано';btn.classList.add('done');
+    setTimeout(()=>{btn.textContent='📋 Скопировать';btn.classList.remove('done')},2000);
+  });
+}
+st(0);
+</script>
+</body></html>
